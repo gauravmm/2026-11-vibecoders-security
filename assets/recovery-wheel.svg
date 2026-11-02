@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="600" height="600" viewBox="0 0 600 600">
+<path d="M300 300 L300 20 A280 280 0 0 1 580 300 Z" fill="#78334e"/>
+<path d="M300 300 L580 300 A280 280 0 0 1 300 580 Z" fill="#542437"/>
+<path d="M300 300 L300 580 A280 280 0 0 1 20 300 Z" fill="#baa7af"/>
+<path d="M300 300 L20 300 A280 280 0 0 1 300 20 Z" fill="#e8d0d8"/>
+<path d="M300 20 V580 M20 300 H580" stroke="white" stroke-width="6"/>
+<g font-family="Roboto, sans-serif" font-size="32" font-weight="700" text-anchor="middle">
+<text x="190" y="171" fill="#333333">Deleted<tspan x="190" dy="38">records</tspan></text>
+<text x="410" y="171" fill="white">Bad<tspan x="410" dy="38">change</tspan></text>
+<text x="410" y="402" fill="white">Revoked<tspan x="410" dy="38">tool key</tspan></text>
+<text x="190" y="402" fill="#333333">Runaway<tspan x="190" dy="38">agent</tspan></text>
+</g>
+<circle cx="300" cy="300" r="58" fill="white"/>
+<text x="300" y="313" font-family="Roboto, sans-serif" font-size="36" font-weight="700" text-anchor="middle" fill="#78334e">UAT</text>
+</svg>

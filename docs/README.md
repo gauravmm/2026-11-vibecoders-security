@@ -6,6 +6,8 @@ Research snapshot: **2 November 2026**. Three Luna agents researched SaaS contro
 
 [AI-security talk content](talk-content.md) adapts the hook and setup of the April ABC Infrastructure talk into **20 minutes of speaking plus 5 minutes of Q&A**. Its frame is Constrain, Pace, Observe, Recover. It includes automated red-teaming and AI-focused UAT recovery drills.
 
+The first slide cut is in [`slides.typ`](../slides.typ), with native presenter notes (`make notes`). Its [Grok adversarial review and dispositions](slides-adversarial-review.md) cover sequencing and content coverage, counting the notes as part of the material.
+
 The [earlier takeaway](talk-takeaway.md) and [Astra adversarial review](talk-adversarial-review.md) reflect the previous broader scope and have not been updated or repeated for this rewrite. The [recovery recipe](recovery-drill.md) remains optional implementation background for environment separation, sanitized data refreshes and backup drills. The research below retains its broader AI/SaaS scope as an evidence library.
 
 ## Reading order

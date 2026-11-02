@@ -11,6 +11,7 @@
     "barh",
     "barw",
     "cisa",
+    "cofounder",
     "colspans",
     "cspell",
     "dbir",
@@ -29,6 +30,7 @@
     "manek",
     "marp",
     "metropolyst",
+    "mindmap",
     "ncsc",
     "ndss",
     "nvfp",
@@ -57,6 +59,7 @@
     "typst",
     "typstyle",
     "underbrace",
-    "vibecoders"
+    "vibecoders",
+    "willison"
   ]
 }

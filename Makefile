@@ -9,17 +9,22 @@ ASSETS := $(shell find assets -type f)
 slides.pdf: slides.typ $(ASSETS)
 	typst compile $(FONTS) slides.typ
 
+notes: slides-notes.pdf
+
+slides-notes.pdf: slides.typ $(ASSETS)
+	typst compile $(FONTS) --input notes=true slides.typ slides-notes.pdf
+
 watch:
 	typst watch $(FONTS) slides.typ
 
 fmt:
 	$(TYPSTYLE) -i slides.typ
 
-check: slides.pdf
+check: slides.pdf slides-notes.pdf
 	$(TYPSTYLE) --check slides.typ
 	$(CSPELL) .
 
 install-hooks:
 	git config core.hooksPath .githooks
 
-.PHONY: watch fmt check install-hooks
+.PHONY: notes watch fmt check install-hooks
