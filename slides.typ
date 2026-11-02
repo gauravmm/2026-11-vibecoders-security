@@ -108,7 +108,9 @@
   main-text-color: C.ink,
   progress-bar-background: C.accent,
   footer: [Vibecoders Security],
-  config-common(show-notes-on-second-screen: if sys.inputs.at("notes", default: "false") == "true" { right } else { none }),
+  config-common(show-notes-on-second-screen: if sys.inputs.at("notes", default: "false") == "true" { right } else {
+    none
+  }),
   config-methods(show-notes: (self: none, width: 0pt, height: 0pt) => block(
     fill: C.stripe,
     width: width,
@@ -241,7 +243,18 @@
 ]
 
 #slide(title: [Constrain · Give it a smaller world.])[
-  #dtable(columns: (1fr, 1.6fr), size: 0.9em, [Useful job], [Authority it actually needs], [Summarize mail], [Read the relevant mailbox or records], [Prepare replies], [Create drafts], [Suggest cleanup], [Produce a reviewable list])
+  #dtable(
+    columns: (1fr, 1.6fr),
+    size: 0.9em,
+    [Useful job],
+    [Authority it actually needs],
+    [Summarize mail],
+    [Read the relevant mailbox or records],
+    [Prepare replies],
+    [Create drafts],
+    [Suggest cleanup],
+    [Produce a reviewable list],
+  )
   #v(0.8em)
   #accent[Keep permanent deletion outside its authority.]
   #notes[
@@ -329,7 +342,16 @@
   #v(0.55em)
   #big[“I've stopped.”]
   #v(0.85em)
-  #dtable(columns: (1fr, 1fr, 1fr), size: 0.8em, [Tool request], [Policy decision], [Actual outcome], [Send message], [No approval → deny], [Nothing delivered])
+  #dtable(
+    columns: (1fr, 1fr, 1fr),
+    size: 0.8em,
+    [Tool request],
+    [Policy decision],
+    [Actual outcome],
+    [Send message],
+    [No approval → deny],
+    [Nothing delivered],
+  )
   #v(0.7em)
   #accent[Keep the evidence outside the agent's control.]
   #notes[
@@ -344,7 +366,19 @@
 #slide(title: [Observe · Automate hostile inputs. Check tool outcomes.])[
   #tag[ILLUSTRATIVE STAGING TRACE · SYNTHETIC DATA · NOT A PERFORMED TEST]
   #v(0.55em)
-  #dtable(columns: (0.8fr, 2.5fr), size: 0.78em, inset: 7pt, [Step], [What to verify], [Baseline], [A permitted draft is created. Approved test mail reaches the test inbox.], [Attack read], [A retrieved email asks for another customer's data to be sent elsewhere.], [Boundary], [Unauthorized read/send is rejected by policy; logs and destination agree.])
+  #dtable(
+    columns: (0.8fr, 2.5fr),
+    size: 0.78em,
+    inset: 7pt,
+    [Step],
+    [What to verify],
+    [Baseline],
+    [A permitted draft is created. Approved test mail reaches the test inbox.],
+    [Attack read],
+    [A retrieved email asks for another customer's data to be sent elsewhere.],
+    [Boundary],
+    [Unauthorized read/send is rejected by policy; logs and destination agree.],
+  )
   #v(0.6em)
   #accent[Did a forbidden action actually happen?]
   #notes[
@@ -438,6 +472,7 @@
     rows: (auto, auto),
     gutter: 0.8em,
     card([Constrain], [Relevant mail. Drafts. No permanent deletion.]), card([Pace], [Exact-action approval. Small batches. Execution caps.]),
+
     card([Observe], [Actual tool outcomes. Adversarial regression tests.]), card([Recover], [Independent stop. Protected backups. Practised restore.]),
   )
   #notes[
@@ -495,7 +530,19 @@
 #slide(title: [Appendix B · The smallest useful test suite.])[
   #tag[OPTIONAL · OUTSIDE THE 20-MINUTE TALK]
   #v(0.5em)
-  #dtable(columns: (1.1fr, 1.7fr), size: 0.75em, inset: 7pt, [Direct policy test], [Then exercise the complete agent workflow], [A cannot read B's record], [Hostile retrieved content requests B's record], [Unapproved send is denied], [An email asks for a send; change approved arguments], [Tool cap cannot be exceeded], [A task induces a bounded retry/tool loop])
+  #dtable(
+    columns: (1.1fr, 1.7fr),
+    size: 0.75em,
+    inset: 7pt,
+    [Direct policy test],
+    [Then exercise the complete agent workflow],
+    [A cannot read B's record],
+    [Hostile retrieved content requests B's record],
+    [Unapproved send is denied],
+    [An email asks for a send; change approved arguments],
+    [Tool cap cannot be exceeded],
+    [A task induces a bounded retry/tool loop],
+  )
   #v(0.6em)
   #accent[Assert from logs and state. Keep every demonstrated failure.]
   #notes[
