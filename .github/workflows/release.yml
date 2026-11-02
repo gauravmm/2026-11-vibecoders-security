@@ -1,0 +1,22 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7.0.1
+      - uses: typst-community/setup-typst@v5.3.0
+        with:
+          typst-version: "0.15.1"
+      # Fonts are vendored under .fonts/, so the PDF is identical to a local build.
+      - run: typst compile --font-path .fonts slides.typ slides.pdf
+      - uses: softprops/action-gh-release@v3.0.3
+        with:
+          files: slides.pdf
