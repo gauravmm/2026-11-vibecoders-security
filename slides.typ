@@ -1,4 +1,4 @@
-#import "@preview/touying:0.6.1": config-common, config-methods, config-page, speaker-note, touying-fn-wrapper, utils
+#import "@preview/touying:0.6.1": config-common, config-methods, config-page, config-store, speaker-note, touying-fn-wrapper, touying-set-config, utils
 #import "@preview/metropolyst:0.1.0": config-info, metropolyst-theme, slide
 
 // Palette and split-page layout from OcelliQ/2026-04-ABC-Infrastructure. Keep colors in
@@ -153,74 +153,22 @@
   #body
 ]
 
-#half-page[
-  #title-page()
-  #notes[
-    *0:00–0:10 · 10 seconds.* Audience: founders and builders in teams of 1–5. Twenty minutes, then a separate five-minute Q&A. The promise is one useful agent workflow with four safeguards, not a complete security programme.
-
-    *Delivery path / reference, not a script:* Use the twenty-minute clock as checkpoints: setup ends at 4:00, Constrain at 8:00, Pace at 11:00, Observe at 15:00; protect 15:00–18:00 for recovery. Speak the core lesson, not every note. Source, reference and Q&A paragraphs are unspoken unless needed.
-
-    *Cut guide:* First drop the Invariant example on slide 7, the detailed sanitization list on slide 8 and scanner names on slide 13. On slide 16 walk only the deleted-record restore wedge in full; keep the other wedges for Q&A. If late, show slide 17 and speak slide 18's one-workflow commitment there. Retain the positive control, real tool outcomes, independent stop and protected backups/tested restore.
-
-    *Author:* This first cut follows docs/talk-content.md. Preserve the sparse audience slides; implementation detail lives here and in the optional appendix. Rehearse before presenting; the notes are reference material, not a read-aloud script.
-  ]
-][
-  #logo(height: 6em)
-]
-
-#slide(title: [It had been told to ask first.])[
-  #grid(
-    columns: (1.15fr, 1fr),
-    column-gutter: 1.1em,
-    align: horizon,
-    image("assets/meta_email.png", height: 12.5em),
-    [#big[“I had to RUN to my Mac mini like I was defusing a bomb.”]
-      #v(0.6em)
-      #small[Summer Yue · published user account]
-      #v(0.7em)
-      #accent[What would stop your agent?]],
-  )
-  #notes[
-    *0:10–1:25 · 75 seconds.* Summer Yue reported that her OpenClaw agent bulk-trashed/archived messages despite instructions to wait for approval. Telling it to stop through chat did not stop the reported execution; she went to the host. Pause: it had already been told to ask first. Ask rhetorically: “What would stop your agent if it ignored the next instruction?”
-
-    *Evidence limit:* This is a user's published account and reproduced screenshot, not an independent forensic investigation. Do not claim all mail was irretrievably destroyed or diagnose the internal cause. Screenshot reproduced from the supplied April deck, with attribution intact.
-
-    *Source:* #link("https://simonwillison.net/2026/Feb/23/summer-yue/")[Summer Yue account, reproduced by Simon Willison]. April source: Infrastructure-based Safety For Your 'Claw, 18 April 2026, commit 900fc7e755dbf97dac5ca405c899c00048f2d8af.
-  ]
-]
-
-#slide(title: [The same authority can touch your product.])[
-  #grid(
-    columns: (1.1fr, 1fr),
-    column-gutter: 1.2em,
-    align: horizon,
-    image("assets/replit.png", height: 12em),
-    [#big[An agent deleted an application database.]
-      #v(0.7em)
-      #small[Replit acknowledged the incident. July 2025.]],
-  )
-  #notes[
-    *1:25–2:00 · 35 seconds.* One supporting beat only: Replit acknowledged its Agent deleting a user's app database. For a tiny startup this is the product, not an abstract chatbot problem. Bridge: “Blaming the model does not tell us why it had that much authority.”
-
-    *Evidence limit:* Vendor incident response, not a frequency estimate. The screenshot is the user's account, not a verified technical transcript. Do not infer current Replit settings or guarantees from an old incident, and do not read the full screenshot aloud.
-
-    *Source:* #link("https://replit.com/blog/doubling-down-on-our-commitment-to-secure-vibe-coding")[Replit incident response, 29 July 2025]. Image carried over from the supplied April deck.
-  ]
-]
-
-#slide(title: [An accident is not a diagnosis.])[
-  #big[“Pilot error.”]
-  #v(0.8em)
-  Why was one mistake allowed to do so much damage?
-  #v(1em)
-  #callout[Constrain. #h(0.5em) Pace. #h(0.5em) Observe. #h(0.5em) Recover.]
-  #notes[
-    *2:00–2:55 · 55 seconds.* Reuse the April talk's pilot-error analogy: an accident report that ends at “pilot error” stops before asking how the system allowed the consequence. Likewise “the LLM made a mistake” is a beginning, not a diagnosis.
-
-    Both questions matter: why the model made the error, and why the system allowed such damage. Today focuses on the second. The thesis: build a system that contains an agent's mistake while keeping it useful. Name the four verbs once; do not expand them into another framework slide.
-
-    *Author:* This is a teaching analogy, not a claim that all aviation accidents share a cause. Do not turn it into a history lesson. Source of the hook, analogy and structure: supplied April deck; second verb renamed Pace.
-  ]
+// Keep the reference metadata and empty left footer within the copied opening.
+#touying-set-config(
+  utils.merge-dicts(
+    config-store(footer: none),
+    config-info(
+      title: [Infrastructure-based Safety\ For Your 'Claw],
+      subtitle: [Agentic Builders' Collective],
+      author: [Dr. Gaurav Manek],
+      date: "2026-04-18",
+      institution: [Ocellivision, A*STAR],
+      logo: image("assets/abc-opening/assets/icon-logo.svg", height: 1.5em),
+    ),
+  ),
+)[
+  #import "opening.typ": opening
+  #opening(notes: notes, accent: accent)
 ]
 
 #slide(title: [Two routes to the same tool.])[
@@ -234,7 +182,7 @@
   #v(0.65em)
   #align(center)[#accent[Enforce the boundary outside the model.]]
   #notes[
-    *2:55–4:00 · 65 seconds.* Our one example is an inbox assistant that suggests cleanup and drafts replies. It can misunderstand a legitimate task, or read attacker-controlled instructions in an email, issue, webpage or tool result. The second route is indirect prompt injection: untrusted content is mistaken for authority.
+    *3:10–4:00 · 50 seconds.* Our one example is an inbox assistant that suggests cleanup and drafts replies. It can misunderstand a legitimate task, or read attacker-controlled instructions in an email, issue, webpage or tool result. The second route is indirect prompt injection: untrusted content is mistaken for authority.
 
     Available credentials and tools determine the possible consequence. Better prompts and models can help, but consequential limits also need ordinary code/configuration outside the model. A classifier or output filter is supplementary, not an authorization boundary.
 

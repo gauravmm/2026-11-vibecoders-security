@@ -15,7 +15,7 @@ title page with a patterned side panel. The build tooling comes from
 make                # build slides.pdf (gitignored)
 make notes          # slides-notes.pdf: slide left, native Touying notes right
 make watch          # live preview
-make fmt            # format slides.typ
+make fmt            # format the deck and copied opening helper
 make check          # build + formatting check + spelling check
 make install-hooks  # activate the tracked pre-commit hook
 ```
@@ -27,7 +27,9 @@ hook.
 
 ## Layout
 
-- `slides.typ` — the deck and its reusable styles.
+- `slides.typ` — the current deck and its reusable styles.
+- `opening.typ` — the exact audience opening from the April reference, with new presenter notes.
+- `assets/abc-opening/` — original helper and unmodified images for that opening.
 - `assets/` — images and generated plots.
 - `.fonts/` — vendored Roboto fonts for reproducible builds.
 - `.githooks/pre-commit` — the tracked local quality gate.
@@ -36,6 +38,10 @@ hook.
 
 ## Presenting
 
-The main deck has 18 spoken slides for a 20-minute talk, followed by a separate five-minute Q&A slide and two optional appendix slides. Speaker notes contain the timing budget, source links, evidence limits, cut/optional material and author comments. `make notes` renders these native Touying notes beside each slide; the audience PDF also carries Touying presenter metadata. The notes PDF is a presenter/review artifact and should not be projected as the audience deck.
+The main deck has 20 spoken slides for a 20-minute talk, followed by a separate five-minute Q&A slide and two optional appendix slides. The six-slide opening is copied exactly from the April ABC Infrastructure deck, through “When Designing Infrastructure”, including the original title, April event/date, institution, QR target, images, layouts and pause builds, by request. Its original left footer is empty; the later slides retain the current design. Slide totals in the original footer reflect this deck's length. Direct PNG comparison of all ten opening build pages matches the reference pixel for pixel outside the slide-total digits; no other visual differences were found. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
 
-The red-team trace is explicitly illustrative, not a performed experiment. Rehearse the timing before presenting. The email and database incident screenshots were copied from the supplied April ABC Infrastructure deck; their sources and limits are attributed in the relevant speaker notes. The recovery wheel is an authored SVG. The current content plan is `docs/talk-content.md`; detailed references and the recovery recipe live under `docs/`.
+Speaker notes contain timing, source links, evidence limits, cut material and author comments. Historical incident claims and the original “OWASP's STRIDE” wording remain verbatim on audience slides; notes contextualize them. `make notes` renders native Touying notes beside each slide; the audience PDF also carries presenter metadata. The notes PDF is for presenter/review use.
+
+The red-team trace is explicitly illustrative, not a performed experiment. Rehearse the timing before presenting. All incident screenshots in the opening are unchanged copies from the supplied April ABC Infrastructure deck; their sources and limits are attributed in the relevant speaker notes. The recovery wheel is an authored SVG. The current content plan is `docs/talk-content.md`; detailed references and the recovery recipe live under `docs/`.
+
+The earlier Grok review under `docs/` predates the exact-copy opening and does not review the added historical claims or their new presenter notes.

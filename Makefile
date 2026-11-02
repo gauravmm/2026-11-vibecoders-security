@@ -5,23 +5,24 @@ FONTS  := --font-path .fonts
 TYPSTYLE := typstyle --line-width 100000 --wrap-text=fill
 CSPELL := npx -y cspell@10.4.0 lint --no-progress --dot
 ASSETS := $(shell find assets -type f)
+SOURCES := slides.typ opening.typ
 
-slides.pdf: slides.typ $(ASSETS)
+slides.pdf: $(SOURCES) $(ASSETS)
 	typst compile $(FONTS) slides.typ
 
 notes: slides-notes.pdf
 
-slides-notes.pdf: slides.typ $(ASSETS)
+slides-notes.pdf: $(SOURCES) $(ASSETS)
 	typst compile $(FONTS) --input notes=true slides.typ slides-notes.pdf
 
 watch:
 	typst watch $(FONTS) slides.typ
 
 fmt:
-	$(TYPSTYLE) -i slides.typ
+	$(TYPSTYLE) -i $(SOURCES) assets/abc-opening/figures/half-page.typ
 
 check: slides.pdf slides-notes.pdf
-	$(TYPSTYLE) --check slides.typ
+	$(TYPSTYLE) --check $(SOURCES) assets/abc-opening/figures/half-page.typ
 	$(CSPELL) .
 
 install-hooks:

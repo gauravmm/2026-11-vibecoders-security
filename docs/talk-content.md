@@ -12,6 +12,8 @@ The exact vendor capabilities illustrated in the April deck are not repeated as 
 
 ## Content and timing
 
+The exact six-slide ABC opening through “When Designing Infrastructure” now supersedes the hook/setup storyboard below. It retains the original April title/event/date/QR, claims and builds by request; the opening plus “Two routes to the same tool” transition stays within 0:00–4:00. The current slide notes govern delivery and historical caveats.
+
 | Clock | Content | Main visual |
 |---|---|---|
 | 0:00–2:00 | Hook: the agent would not stop | Original email incident screenshot |
