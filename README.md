@@ -1,4 +1,6 @@
-# Vibecoders Security
+# Ship Fast Without Shipping Holes
+
+*AI security for startups that have better things to be famous for.*
 
 Slides for a talk on security in AI-assisted software development. The visual
 system is based on the
@@ -38,7 +40,7 @@ hook.
 
 ## Presenting
 
-The main deck has 20 spoken slides for a 20-minute talk, followed by a separate five-minute Q&A slide and two optional appendix slides. The six-slide opening is copied exactly from the April ABC Infrastructure deck, through “When Designing Infrastructure”, including the original title, April event/date, institution, QR target, images, layouts and pause builds, by request. Its original left footer is empty; the later slides retain the current design. Slide totals in the original footer reflect this deck's length. Direct PNG comparison of all ten opening build pages matches the reference pixel for pixel outside the slide-total digits; no other visual differences were found. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
+The main deck has 20 spoken slides for a 20-minute talk, followed by a separate five-minute Q&A slide and two optional appendix slides. The six-slide opening was copied exactly from the April ABC Infrastructure deck, through “When Designing Infrastructure”, including the original title, April event/date, institution, QR target, images, layouts and pause builds, by request. Its original left footer is empty; the later slides retain the current design. Slide totals in the original footer reflect this deck's length. At the time of copying, all ten opening build pages matched the reference pixel for pixel outside the slide-total digits. The title and subtitle have since been updated for this talk. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
 
 Speaker notes contain timing, source links, evidence limits, cut material and author comments. Historical incident claims and the original “OWASP's STRIDE” wording remain verbatim on audience slides; notes contextualize them. `make notes` renders native Touying notes beside each slide; the audience PDF also carries presenter metadata. The notes PDF is for presenter/review use.
 

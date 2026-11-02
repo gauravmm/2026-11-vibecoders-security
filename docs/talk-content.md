@@ -1,4 +1,6 @@
-# AI agents: build for the mistake
+# Ship Fast Without Shipping Holes
+
+*AI security for startups that have better things to be famous for.*
 
 **Audience:** founders and builders at startups with 1–5 employees using coding assistants or tool-using AI agents. **Timing:** 20-minute talk, followed by a separate 5-minute Q&A. **Aim:** memorable safeguards a founder can apply to one agent workflow, not a comprehensive security programme.
 

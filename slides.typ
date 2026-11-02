@@ -125,8 +125,8 @@
     },
   )),
   config-info(
-    title: [AI agents:\ build for the mistake],
-    subtitle: [Constrain. Pace. Observe. Recover.],
+    title: [Ship Fast Without\ Shipping Holes],
+    subtitle: [Minimal AI security for startups.],
     author: [Dr. Gaurav Manek],
     date: "2026-11",
     institution: [gauravmanek.com],
@@ -153,13 +153,12 @@
   #body
 ]
 
-// Keep the reference metadata and empty left footer within the copied opening.
+// Use the adopted talk title with the reference opening layout and empty left footer.
 #touying-set-config(
   utils.merge-dicts(
     config-store(footer: none),
     config-info(
-      title: [Infrastructure-based Safety\ For Your 'Claw],
-      subtitle: [Agentic Builders' Collective],
+      title: [Ship Fast Without\ Shipping Holes],
       author: [Dr. Gaurav Manek],
       date: "2026-04-18",
       institution: [Ocellivision, A*STAR],
