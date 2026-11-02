@@ -18,3 +18,7 @@ Research snapshot: 2 November 2026. Full annotations are maintained with their t
 - **[Invariant's GitHub MCP disclosure](https://invariantlabs.ai/blog/mcp-github-vulnerability)** — Concrete demonstration connecting indirect injection to private-data disclosure. A tested setup is not a prevalence estimate.
 
 For automated red-team tooling, see the Promptfoo, PyRIT, and garak entries in the AI bibliography, alongside the [automated red-teaming plan](startup-security-proposal.md#automated-red-teaming-as-a-release-and-regression-control). Tool choice should follow the application boundary and observable failure conditions.
+
+## Recovery and environment supplement
+
+[Recovery exercise source notes](recovery-drill.md#source-notes) annotate NCSC backup guidance, OWASP test-data protection guidance, and the Principles of Chaos Engineering. The wheel, monthly cadence and release practice are proposed adaptations for tiny teams.

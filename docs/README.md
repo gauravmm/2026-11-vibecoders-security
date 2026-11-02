@@ -2,6 +2,12 @@
 
 Research snapshot: **2 November 2026**. Three Luna agents researched SaaS controls, AI tools and agents, and standards/incident evidence in parallel; the main proposal consolidates their findings. Sources include guidance, product documentation, research, and incident investigations. This is a focused research synthesis, not an exhaustive systematic review or a compliance assessment.
 
+## Talk for teams of 1–5
+
+[AI-security talk content](talk-content.md) adapts the hook and setup of the April ABC Infrastructure talk into **20 minutes of speaking plus 5 minutes of Q&A**. Its frame is Constrain, Pace, Observe, Recover. It includes automated red-teaming and AI-focused UAT recovery drills.
+
+The [earlier takeaway](talk-takeaway.md) and [Astra adversarial review](talk-adversarial-review.md) reflect the previous broader scope and have not been updated or repeated for this rewrite. The [recovery recipe](recovery-drill.md) remains optional implementation background for environment separation, sanitized data refreshes and backup drills. The research below retains its broader AI/SaaS scope as an evidence library.
+
 ## Reading order
 
 1. [Startup security proposal](startup-security-proposal.md): broad principles, concrete implementation sequence, owners, completion evidence, automated red-teaming, and budget decisions.
