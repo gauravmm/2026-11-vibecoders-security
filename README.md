@@ -30,8 +30,12 @@ hook.
 ## Layout
 
 - `slides.typ` — the current deck and its reusable styles.
+- `citations.typ` — linked superscript citations, deduplicated by URL/key, with automatic reference slides.
+- `blocks.typ` — grey and outlined blocks; both accept `center: true`.
+- `principles.typ` — numbered principle rows with optional examples.
 - `opening.typ` — the exact audience opening from the April reference, with new presenter notes.
 - `assets/abc-opening/` — original helper and unmodified images for that opening.
+- `assets/governance/` — IMDA, ISO and OWASP covers for build 3 of “When Designing Infrastructure”, adapted from the AI for Leaders instructor deck.
 - `assets/` — images and generated plots.
 - `.fonts/` — vendored Roboto fonts for reproducible builds.
 - `.githooks/pre-commit` — the tracked local quality gate.
@@ -47,3 +51,12 @@ Speaker notes contain timing, source links, evidence limits, cut material and au
 The red-team trace is explicitly illustrative, not a performed experiment. Rehearse the timing before presenting. All incident screenshots in the opening are unchanged copies from the supplied April ABC Infrastructure deck; their sources and limits are attributed in the relevant speaker notes. The recovery wheel is an authored SVG. The current content plan is `docs/talk-content.md`; detailed references and the recovery recipe live under `docs/`.
 
 The earlier Grok review under `docs/` predates the exact-copy opening and does not review the added historical claims or their new presenter notes.
+
+Citations and the numbered principles design come from the AI for Leaders instructor deck in
+`ai-for-clm`; its rendered slides are distributed in
+[AI for Leaders](https://github.com/OcelliQ/ai-for-leaders). The citation helper is adapted
+to this deck's existing Touying/Metropolyst versions. Write the full reference in
+`#cite-source("URL")[Author. _Title_. Date.]` at the claim; repeated URLs reuse their
+number. `#reference-slides()` collects references after the appendix. Register any
+notes-only source outside `#notes` with `display: false` so it also appears in the
+audience PDF. Presenter notes retain the evidence limits and source context.

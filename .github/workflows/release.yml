@@ -15,8 +15,10 @@ jobs:
       - uses: typst-community/setup-typst@v5.3.0
         with:
           typst-version: "0.15.1"
-      # Fonts are vendored under .fonts/, so the PDF is identical to a local build.
-      - run: typst compile --font-path .fonts slides.typ slides.pdf
+      # Use the same audience and presenter-note targets as local builds.
+      - run: make slides.pdf slides-notes.pdf
       - uses: softprops/action-gh-release@v3.0.3
         with:
-          files: slides.pdf
+          files: |
+            slides.pdf
+            slides-notes.pdf

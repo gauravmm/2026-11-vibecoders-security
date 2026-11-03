@@ -1,27 +1,15 @@
+#import "blocks.typ": gblock, lblock
 // Opening adapted from OcelliQ/2026-04-ABC-Infrastructure,
 // commit 900fc7e755dbf97dac5ca405c899c00048f2d8af, through
 // “When Designing Infrastructure”. Updated for the current talk and its four principles.
-#import "@preview/touying:0.6.1": pause
+#import "@preview/touying:0.6.1": only, pause
 #import "@preview/tiaoma:0.3.0"
 #import "@preview/metropolyst:0.1.0": slide
 #import "@preview/touying:0.6.1": config-page
 #import "assets/abc-opening/figures/half-page.typ": half-page, title-page
 
-// Numbered principle: big grey index number + bold title, one-line body, optional example.
-#let principle(num, title, body, example: none) = grid(
-  columns: (auto, 1fr),
-  column-gutter: 0.7em,
-  row-gutter: 0.5em,
-  align: (right + top, left + top),
-  text(weight: "bold", size: 3em, fill: luma(140))[#num.],
-  [
-    *#title* \
-    #body
-    #if example != none [
-      \ #text(size: 0.85em, fill: luma(100))[_e.g._ #example]
-    ]
-  ],
-)
+#import "principles.typ": principle
+#import "citations.typ": cite-source
 
 #let opening(notes: none, accent: none) = [
   #half-page[
@@ -59,13 +47,17 @@
     config: config-page(margin: (right: 0pt, bottom: 0pt)),
   )[
 
+    #cite-source(
+      "https://simonwillison.net/2026/Feb/23/summer-yue/",
+      display: false,
+    )[Summer Yue account, reproduced by Simon Willison. 23 February 2026.]
     #notes[
       *0:10–1:00 · 50 seconds.* Summer Yue reported that her OpenClaw agent bulk-trashed/archived mail despite instructions to await approval; chat instructions did not stop the reported execution and she went to the host. Ask rhetorically what would stop your agent. Do not read the screenshot aloud.
 
-      *Source:* #link("https://simonwillison.net/2026/Feb/23/summer-yue/")[Summer Yue account, reproduced by Simon Willison]. Original April screenshot is unchanged.
+      *Source:* #link("https://simonwillison.net/2026/Feb/23/summer-yue/")[Summer Yue account, reproduced by Simon Willison. 23 February 2026.]. Original April screenshot is unchanged.
     ]
     #v(1fr)
-    *Meta's director of AI alignment lost her emails.*
+    *Meta's director of AI alignment lost her emails.*#cite-source("https://simonwillison.net/2026/Feb/23/summer-yue/")[Summer Yue account, reproduced by Simon Willison. 23 February 2026.]
     #v(1fr)
     _I had to run to my Mac mini like I was defusing a bomb._
 
@@ -84,25 +76,31 @@
     config: config-page(margin: (right: 0pt, bottom: 0pt)),
   )[
 
+    #cite-source(
+      "https://www.channelnewsasia.com/singapore/bee-cheng-hiang-data-breach-ai-pdpc-emails-6421711",
+      display: false,
+    )[CNA. _Bee Cheng Hiang data breach: AI-written marketing script_. Reporting of PDPC findings, 30 September 2026.]
+    #cite-source(
+      "https://www.straitstimes.com/tech/bad-ai-prompt-exposes-bee-cheng-hiang-customers-e-mail-addresses-in-first-case-of-ai-related-data",
+      display: false,
+    )[The Straits Times, Kenny Chee, 30 September 2026; updated 2 October 2026]
     #notes[
       *1:00–1:20 · 20 seconds.* In April 2026, Bee Cheng Hiang used an AI-written Python script to send marketing emails. It exposed 95,364 customers' email addresses to other recipients. Testing checked activity logs without inspecting the actual test email. Bridge: a successful send is not the same as a safe send.
 
-      *Source:* #link("https://www.channelnewsasia.com/singapore/bee-cheng-hiang-data-breach-ai-pdpc-emails-6421711")[CNA reporting of PDPC's findings, 30 September 2026]. Only email addresses were affected; PDPC reported no evidence of further misuse. This was AI-assisted code development, not an autonomous agent sending mail. The lesson is to inspect real outputs and constrain bulk actions.
+      *Source:* #link("https://www.channelnewsasia.com/singapore/bee-cheng-hiang-data-breach-ai-pdpc-emails-6421711")[CNA. _Bee Cheng Hiang data breach: AI-written marketing script_. Reporting of PDPC findings, 30 September 2026.]. Only email addresses were affected; PDPC reported no evidence of further misuse. This was AI-assisted code development, not an autonomous agent sending mail. The lesson is to inspect real outputs and constrain bulk actions.
 
       *Screenshot:* User-supplied capture of #link("https://www.straitstimes.com/tech/bad-ai-prompt-exposes-bee-cheng-hiang-customers-e-mail-addresses-in-first-case-of-ai-related-data")[The Straits Times, Kenny Chee, 30 September 2026; updated 2 October 2026]. Photo: Lim Yaohui / The Straits Times.
     ]
     #v(1fr)
-    #accent[#text(size: 2em, weight: 700)[95,364]]
 
-    customers' email addresses exposed.
+    #accent[#text(size: 4em, weight: 700)[95,364]]\
+    #v(0.25em)
+    customer emails exposed.#cite-source("https://www.channelnewsasia.com/singapore/bee-cheng-hiang-data-breach-ai-pdpc-emails-6421711")[CNA. Bee Cheng Hiang data breach; reporting of PDPC findings. 30 September 2026.]
 
     #v(1em)
-    *Testing checked the logs.\
-    Nobody inspected the test email.*
+    *Nobody inspected the test email.*
 
     #v(1fr)
-    Singapore · April 2026
-    #v(0.5em)
   ][
     #layout(size => block(width: size.width, height: size.height, clip: true)[
       #place(top + left)[
@@ -118,12 +116,20 @@
     composer: (1fr, 1fr),
   )[
 
+    #cite-source(
+      "https://blog.railway.com/p/your-ai-wants-to-nuke-your-database",
+      display: false,
+    )[Railway. _Your AI wants to nuke your database_. 29 April 2026. All customer data was recovered.]
+    #cite-source(
+      "https://replit.com/blog/doubling-down-on-our-commitment-to-secure-vibe-coding",
+      display: false,
+    )[Replit. _Doubling down on our commitment to secure vibe coding_. 29 July 2025.]
     #notes[
       *1:20–1:45 · 25 seconds.* Two examples, one sentence each. At PocketOS, an agent found an account-wide Railway token on disk and used one API call to delete the production database volume. The dashboard had a 48-hour deletion delay; the legacy API endpoint did not. Replit separately acknowledged an Agent database-deletion incident in July 2025. Bridge immediately to why the system allowed that much damage.
 
-      *PocketOS source and outcome:* #link("https://blog.railway.com/p/your-ai-wants-to-nuke-your-database")[Railway's incident response, 29 April 2026]. Railway confirms the authenticated volume deletion, the account-wide token and the missing API deletion delay. Railway recovered all the customer's data and extended the 48-hour soft-delete window to API deletions. Do not describe this as permanent loss or claim all backup copies were destroyed. The lesson is to scope credentials and enforce safeguards on every execution path. The screenshot is a capture of Railway's response.
+      *PocketOS source and outcome:* #link("https://blog.railway.com/p/your-ai-wants-to-nuke-your-database")[Railway. _Your AI wants to nuke your database_. 29 April 2026. All customer data was recovered.]. Railway confirms the authenticated volume deletion, the account-wide token and the missing API deletion delay. Railway recovered all the customer's data and extended the 48-hour soft-delete window to API deletions. Do not describe this as permanent loss or claim all backup copies were destroyed. The lesson is to scope credentials and enforce safeguards on every execution path. The screenshot is a capture of Railway's response.
 
-      *Replit source and evidence limit:* #link("https://replit.com/blog/doubling-down-on-our-commitment-to-secure-vibe-coding")[Replit incident response, 29 July 2025]. The retained screenshot is a user's account copied from the April deck. These incidents are examples, not frequency estimates.
+      *Replit source and evidence limit:* #link("https://replit.com/blog/doubling-down-on-our-commitment-to-secure-vibe-coding")[Replit. _Doubling down on our commitment to secure vibe coding_. 29 July 2025.]. The retained screenshot is a user's account copied from the April deck. These incidents are examples, not frequency estimates.
     ]
     #v(1fr)
     #link("https://blog.railway.com/p/your-ai-wants-to-nuke-your-database")[
@@ -131,7 +137,7 @@
     ]
     #v(1fr)
 
-    *One API call deleted PocketOS's production database.*
+    *One API call deleted PocketOS's production database.*#cite-source("https://blog.railway.com/p/your-ai-wants-to-nuke-your-database")[Railway. _Your AI wants to nuke your database_. 29 April 2026. All customer data was recovered.]
 
     The agent found an account-wide token on disk.
 
@@ -141,7 +147,7 @@
     #image("assets/abc-opening/images/replit.png", width: 100%)
     #v(1fr)
 
-    Replit wiped the entire production db of SaaStr.AI.
+    Replit wiped the entire production db of SaaStr.AI.#cite-source("https://replit.com/blog/doubling-down-on-our-commitment-to-secure-vibe-coding")[Replit. _Doubling down on our commitment to secure vibe coding_. 29 July 2025.]
   ]
 
 
@@ -210,7 +216,7 @@
   )
 
   #grid(
-    columns: (1.3fr, auto, 1fr),
+    columns: (1fr, auto, 1fr),
     column-gutter: 0.8em,
     align: (left, center),
   )[
@@ -222,9 +228,34 @@
       #context $stretch(brace.r, size: #measure(principles, width: 30em).height)$
     ]
   ][
-    Four practical habits for containing mistakes.
+    #only("1-2")[
+      Four practical habits for containing mistakes.
 
-    Enforce them in the tools and infrastructure.
+      Enforce them in the tools and infrastructure.
+    ]
+    #pause
+    #only(3)[
+      #grid(
+        columns: (auto, 1fr),
+        column-gutter: 0.7em,
+        row-gutter: 0.7em,
+        align: (left + horizon, left + horizon),
+        box(stroke: 0.5pt + luma(180), image("assets/governance/imda-agentic-ai.png", width: 3.2em)),
+        [
+          *IMDA Model AI Governance Framework for Agentic AI*#cite-source("https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf")[Infocomm Media Development Authority (IMDA). _Model AI Governance Framework for Agentic AI_. Version 1.5. Published 20 May 2026; updated 5 June 2026.] \ Risk assessment, policies and oversight. v1.5
+        ],
+
+        box(stroke: 0.5pt + luma(180), image("assets/governance/iso-42001.png", width: 3.2em)),
+        [
+          *ISO/IEC 42001*#cite-source("https://www.iso.org/standard/42001")[International Organization for Standardization / International Electrotechnical Commission. _ISO/IEC 42001:2023 — Artificial intelligence — Management system_. First edition, December 2023.] \ AI management systems
+        ],
+
+        box(stroke: 0.5pt + luma(180), image("assets/governance/owasp-agentic-ai-threats.png", width: 3.2em)),
+        [
+          *OWASP*#cite-source("https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/")[OWASP GenAI Security Project, Agentic Security Initiative. _Agentic AI — Threats and Mitigations_. Version 1.0, 17 February 2025.] \ Agentic AI: Threats and Mitigations
+        ],
+      )
+    ]
 
   ]
   #v(1em)
@@ -233,9 +264,9 @@
 
 
   #notes[
-    *2:30–3:10 · 40 seconds across all three builds.* Name the four principles: Constrain access and authority; Pace actions with approvals and limits; Observe actual tool outcomes; Recover with an independent stop and tested restores. Reveal the brace, then the usefulness line. Bridge: “We will apply each of these to one useful inbox assistant.”
+    *2:30–3:10 · 40 seconds across all three builds.* Name the four principles: Constrain access and authority; Pace actions with approvals and limits; Observe actual tool outcomes; Recover with an independent stop and tested restores. Reveal the brace on build 2. On build 3, replace the right-hand summary with the IMDA, ISO and OWASP covers: these frameworks provide structure for governance, management systems and technical threats. Keep the usefulness line as the bridge. Bridge: “We will apply each of these to one useful inbox assistant.”
 
-    *Author:* Summary of the four sections in this talk. These are general design principles, not guarantees for a named connector. Keep the assistant useful while reducing the damage a mistake can cause.
+    *Author:* Summary of the four sections in this talk. These are general design principles, not guarantees for a named connector. Keep the assistant useful while reducing the damage a mistake can cause. The governance panel is adapted from the local AI for Leaders instructor deck (`ai-for-clm`, chapter 06); covers and citations retain its editions. These four habits are our talk structure, not a claimed mapping or certification against those frameworks.
   ]
 
 ]

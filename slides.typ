@@ -1,3 +1,5 @@
+#import "blocks.typ": gblock, lblock
+#import "citations.typ": cite-source, reference-slides
 #import "@preview/touying:0.6.1": config-common, config-methods, config-page, config-store, speaker-note, touying-fn-wrapper, touying-set-config, utils
 #import "@preview/metropolyst:0.1.0": config-info, metropolyst-theme, slide
 
@@ -126,7 +128,7 @@
   )),
   config-info(
     title: [Ship Fast Without\ Shipping Holes],
-    subtitle: [Minimal AI security for startups.],
+    subtitle: [Minimal security for AI startups.],
     author: [Dr. Gaurav Manek],
     date: "2026-11",
     institution: [gauravmanek.com],
@@ -180,6 +182,8 @@
   #align(center)[#big[Agent → tool → consequence]]
   #v(0.65em)
   #align(center)[#accent[Enforce the boundary outside the model.]]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP Security Cheat Sheet]]
   #notes[
     *3:10–4:00 · 50 seconds.* Our one example is an inbox assistant that suggests cleanup and drafts replies. It can misunderstand a legitimate task, or read attacker-controlled instructions in an email, issue, webpage or tool result. The second route is indirect prompt injection: untrusted content is mistaken for authority.
 
@@ -204,6 +208,8 @@
   )
   #v(0.8em)
   #accent[Keep permanent deletion outside its authority.]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP guidance]]
   #notes[
     *4:00–5:10 · 70 seconds.* The assistant is still useful with less authority. Limit the records it reads; give it draft creation without a general send tool; return a cleanup list rather than permanent deletion. If moving to trash is permitted, keep permanent deletion separate. The agent should not be able to grant itself more access, change its enforcement controls or retrieve bypass credentials.
 
@@ -219,6 +225,8 @@
     #v(1em)
     Scope what it can read #strong[and] where it can write.
   ]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://invariantlabs.ai/blog/mcp-github-vulnerability")[Invariant Labs disclosure, 26 May 2025]]
   #notes[
     *5:10–6:10 · 60 seconds.* Read access is disclosure authority. An agent that can read private mail and write arbitrary public posts or outbound messages has a disclosure path, even if the source connector is read-only. Narrow sources and destinations together, including other tools such as browser, shell and network.
 
@@ -239,6 +247,8 @@
   #accent[The development agent gets no production credentials.]
   #v(0.65em)
   #small[Scheduled refresh: sanitize in the protected production boundary → validate → staging.]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://owasp.github.io/DevSecOpsGuideline/3-Governance/3-2-Data-protection/")[OWASP data protection]]
   #notes[
     *6:10–8:00 · 110 seconds.* Translate to coding agents. Dev builds/tests in an isolated workspace; a reviewed change advances to staging/UAT and then production. UAT means user acceptance testing; it may share staging. No fourth environment is required. Separate data, credentials and integration configuration. Different folders are insufficient if shell access exposes the founder's host credentials. The dev agent gets neither production secrets nor an unrestricted deployment tool.
 
@@ -256,6 +266,8 @@
     #v(1em)
     #callout[“Ask first” belongs in the tool boundary.]
   ]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP guidance]]
   #notes[
     *8:00–9:35 · 95 seconds.* The inbox agent prepares a draft. The person sees recipient and content; only the approved action executes. Application code validates the authenticated actor, object/target and action, independently of the model. The model cannot approve itself. If recipient or content changes, earlier approval no longer authorizes the send. Expire approvals and prevent replay/duplicate side effects as appropriate.
 
@@ -275,6 +287,8 @@
   )
   #v(0.75em)
   #small[Enforce limits outside the model. Pick limits that fit the job.]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP guidance]]
   #notes[
     *9:35–11:00 · 85 seconds.* Pace means when it acts, how much it does and when it must ask. For inbox cleanup, a small reviewable batch beats an unlimited loop. Bound tool calls, retries, total runtime, records affected and spend using ordinary runtime/tool controls. There is no universal safe count; choose a batch a person can understand and a loss the business can tolerate.
 
@@ -301,6 +315,8 @@
   )
   #v(0.7em)
   #accent[Keep the evidence outside the agent's control.]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP guidance]]
   #notes[
     *11:00–11:50 · 50 seconds.* Return to the opening: saying “I've stopped” is not evidence that actions stopped. Record tool calls, targets, approval identity/decision and actual outcomes in logs the agent cannot rewrite. Record blocked attempts, too. Minimize secrets and unnecessary message bodies; restrict log access/retention. Final chat text alone cannot establish whether data was read or a message sent.
 
@@ -328,6 +344,8 @@
   )
   #v(0.6em)
   #accent[Did a forbidden action actually happen?]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://owasp.github.io/DevSecOpsGuideline/2-Process/2-4-Test/2-4-6-AI-LLM-Application-Security-Testing/")[OWASP AI application testing]]
   #notes[
     *11:50–13:30 · 100 seconds.* This is the same inbox assistant, now handling two synthetic customers' mail in an isolated staging test. Automated red-teaming means automatically trying hostile inputs against this workflow, then checking whether forbidden actions actually happened. This illustrative trace is a test design, not evidence of a performed test. Narrate each row as a check to make, not an observed result. Use fake records, a controlled destination and production-equivalent policy.
 
@@ -347,6 +365,8 @@
   #accent[Repeat after model, prompt, permission or connector changes.]
   #v(0.5em)
   #small[A passing suite means these tests found no failure.]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://www.promptfoo.dev/docs/red-team/configuration/")[Promptfoo], #cite-source("https://microsoft.github.io/PyRIT/latest/code/framework/")[Microsoft PyRIT], #cite-source("https://github.com/NVIDIA/garak")[NVIDIA garak]]
   #notes[
     *13:30–15:00 · 90 seconds.* Start by testing authorization directly, without a model: customer A cannot fetch B's record; a send without approval is denied even if requested by the agent; changing approved arguments is denied. Then automate hostile messages through the complete workflow. Check tool outcomes, not just model wording. Repeat probabilistic cases; retain failures as regressions. A clean suite does not prove attack-proof behavior. Fix or disable a demonstrated critical boundary failure before release.
 
@@ -383,6 +403,8 @@
   #accent[Versioned backups, protected from the agent.]
   #v(0.6em)
   #small[Code rollback does not restore a database. A staging refresh is not a backup.]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://www.ncsc.gov.uk/guidance/mitigating-malware-and-ransomware-attacks")[NCSC backup and restore guidance]]
   #notes[
     *15:50–16:40 · 50 seconds · Say this core:* Ask how much work you can lose and how long you can be down. Back up the data the agent can damage, keep recoverable versions and protect them from its delete authority. Practise restoring a working application. Code rollback does not restore a database; a staging refresh is not a backup. And restoring data cannot undo disclosure: copied mail cannot be recalled.
 
@@ -404,6 +426,8 @@
       #v(0.75em)
       #small[Known baseline · stop condition · verification]],
   )
+  #v(0.35em)
+  #small[Sources: #cite-source("https://principlesofchaos.org/")[Principles of Chaos Engineering]]
   #notes[
     *16:40–18:00 · 80 seconds · Say this core:* Once a month, try one bounded drill in staging/UAT. Walk only the deleted-record wedge today: start with a working baseline and a known backup; delete seeded test records to simulate a mistake; confirm the deletion; stop writes and restore. Verify the records, their relationships and a working application flow. Measure recovery time and lost work. Keep the receipt and fix failed recovery before shipping the affected change. Set an abort condition and duration; use UAT-only credentials/data. No live destructive demo. A refresh must not mask the failure.
 
@@ -465,6 +489,8 @@
   Keep raw data and credentials inside the protected boundary.
   #v(0.75em)
   #small[One-way scheduled refresh. Synthetic identities. Test integrations. No raw extracts in staging.]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://owasp.github.io/DevSecOpsGuideline/3-Governance/3-2-Data-protection/")[OWASP data protection]]
   #notes[
     *Optional Q&A detail.* Suggested cadence: weekly and after material schema changes, chosen for the product. A narrowly scoped production-side job extracts a needed subset without disrupting production, replaces identifying fields consistently and strips secrets/live integrations. Exclude or sanitize free text, attachments, logs and combinations that could identify someone. Replacing names alone does not establish anonymity. When safe de-identification is uncertain, use synthetic fixtures.
 
@@ -492,6 +518,8 @@
   )
   #v(0.6em)
   #accent[Assert from logs and state. Keep every demonstrated failure.]
+  #v(0.35em)
+  #small[Sources: #cite-source("https://www.promptfoo.dev/docs/red-team/configuration/")[Promptfoo configuration], #cite-source("https://microsoft.github.io/PyRIT/latest/code/framework/")[PyRIT framework], #cite-source("https://github.com/NVIDIA/garak")[garak repository]]
   #notes[
     *Optional Q&A detail.* Use two synthetic customers, canary records, an approved test inbox and a controlled sink. First prove the normal workflow works. Test the backend directly, then repeated hostile inputs through the agent. Ensure attack content was read. Check retrieval/tool logs, policy decisions, actual messages/state and cap alerts. Model refusal alone does not test backend authorization. If a test never reaches the intended boundary, mark that limit.
 
@@ -500,3 +528,6 @@
     *Sources:* #link("https://www.promptfoo.dev/docs/red-team/configuration/")[Promptfoo configuration]; #link("https://microsoft.github.io/PyRIT/latest/code/framework/")[PyRIT framework]; #link("https://github.com/NVIDIA/garak")[garak repository]. Full teaching recipe: docs/research-ai.md. These are implementation starting points, not benchmark results.
   ]
 ]
+
+// Collected in first-use order, including sources registered only in notes.
+#reference-slides()
