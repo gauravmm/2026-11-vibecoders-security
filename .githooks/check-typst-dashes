@@ -1,0 +1,18 @@
+#!/bin/sh
+set -eu
+
+# Unicode Dash characters and soft hyphens, except ASCII hyphen-minus.
+# Include hidden source files; respect ignore rules and skip Git internals.
+if rg --line-number --column --color never --hidden \
+  --glob '*.typ' --glob '!.git/**' \
+  '[\p{Dash}\x{00AD}&&[^-]]' .; then
+  echo 'Typst source must use ASCII - characters: write -, --, or ---.' >&2
+  echo 'For a specific symbol, import it or use a named Typst symbol.' >&2
+  exit 1
+else
+  status=$?
+  # ripgrep returns 1 for no matches; propagate actual search errors.
+  if [ "$status" -ne 1 ]; then
+    exit "$status"
+  fi
+fi

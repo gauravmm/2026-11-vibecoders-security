@@ -18,14 +18,20 @@ make                # build slides.pdf (gitignored)
 make notes          # slides-notes.pdf: slide left, native Touying notes right
 make watch          # live preview
 make fmt            # format the deck and copied opening helper
-make check          # build + formatting check + spelling check
+make check          # dash check + build + formatting check + spelling check
+make check-dashes   # reject Unicode dash characters in Typst source
 make install-hooks  # activate the tracked pre-commit hook
 ```
 
-`make check` needs
+`make check` needs [ripgrep](https://github.com/BurntSushi/ripgrep),
 [typstyle](https://github.com/typstyle-rs/typstyle) 0.15.2 on `PATH` and `npx`
 for [cspell](https://cspell.org). CI runs the same target as the pre-commit
 hook.
+
+Typst source uses ASCII `-` only for dashes: write `-`, `--` (en dash), or
+`---` (em dash). The check covers `.typ` files, including comments and notes.
+For a specific non-ASCII symbol, import it from a package or use a named
+Typst symbol such as `#sym.dash.em` instead of writing the literal character.
 
 ## Layout
 

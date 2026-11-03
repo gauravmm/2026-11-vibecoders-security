@@ -21,11 +21,14 @@ watch:
 fmt:
 	$(TYPSTYLE) -i $(SOURCES) assets/abc-opening/figures/half-page.typ
 
-check: slides.pdf slides-notes.pdf
+check: check-dashes slides.pdf slides-notes.pdf
 	$(TYPSTYLE) --check $(SOURCES) assets/abc-opening/figures/half-page.typ
 	$(CSPELL) .
+
+check-dashes:
+	sh .githooks/check-typst-dashes
 
 install-hooks:
 	git config core.hooksPath .githooks
 
-.PHONY: notes watch fmt check install-hooks
+.PHONY: notes watch fmt check check-dashes install-hooks
