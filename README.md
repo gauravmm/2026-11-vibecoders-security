@@ -37,7 +37,7 @@ Typst symbol such as `#sym.dash.em` instead of writing the literal character.
 ## Layout
 
 - `slides.typ` — entry point: applies the shared theme once, then includes the sections in presentation order.
-- `theme.typ` — deck-wide metadata, colors, typography, presenter-note layout and reusable styles. Also holds the scoped historical opening configuration.
+- `theme.typ` — deck-wide metadata, colors, typography, presenter-note layout and reusable styles.
 - `constrain.typ`, `pace.typ`, `observe.typ`, `recover.typ` — one editable content file per principle.
 - `closing.typ` — closing slides, Q&A, appendices and collected references.
 - `citations.typ` — linked superscript citations, deduplicated by URL/key, with automatic reference slides.
@@ -55,8 +55,8 @@ Typst symbol such as `#sym.dash.em` instead of writing the literal character.
 
 Edit content in its section file; keep shared presentation settings in `theme.typ`.
 Each section imports the shared helpers without applying the theme again.
-`slides.typ` applies the theme before including any content. The opening retains
-its historical event metadata through a scoped configuration defined in `theme.typ`;
+`slides.typ` applies the theme before including any content. The opening uses
+the same talk metadata, colors, fonts and logo settings as the rest of the deck;
 intentional slide-specific layouts (such as edge-to-edge images) remain local.
 The section files preserve speaker notes; splitting content does not rewrite them.
 
@@ -64,7 +64,7 @@ The section files preserve speaker notes; splitting content does not rewrite the
 
 The personal introduction follows the title slide, adapted from the “About Me” slide in `ai-for-clm/01-intro/slides.typ` with the original portrait, credentials and contact links.
 
-The main deck has 20 spoken slides for a 20-minute talk, followed by a separate five-minute Q&A slide and two optional appendix slides. The six-slide opening was copied exactly from the April ABC Infrastructure deck, through “When Designing Infrastructure”, including the original title, April event/date, institution, QR target, images, layouts and pause builds, by request. Its original left footer is empty; the later slides retain the current design. Slide totals in the original footer reflect this deck's length. At the time of copying, all ten opening build pages matched the reference pixel for pixel outside the slide-total digits. The title and subtitle have since been updated for this talk. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
+The main deck has 20 spoken slides for a 20-minute talk, followed by a separate five-minute Q&A slide and two optional appendix slides. The opening was adapted from the April ABC Infrastructure deck, through “When Designing Infrastructure”, retaining its QR target, incident imagery, layouts and pause builds. It now uses the unified presentation theme and current talk metadata. The shared title layout lives in `theme.typ`; the original helper remains archived under `assets/abc-opening/`. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
 
 Speaker notes contain timing, source links, evidence limits, cut material and author comments. Historical incident claims and the original “OWASP's STRIDE” wording remain verbatim on audience slides; notes contextualize them. `make notes` renders native Touying notes beside each slide; the audience PDF also carries presenter metadata. The notes PDF is for presenter/review use.
 

@@ -1,9 +1,8 @@
 #import "blocks.typ": gblock, lblock
 #import "citations.typ": cite-source, reference-slides
 #import "principles.typ": principle
-#import "assets/abc-opening/figures/half-page.typ": half-page, title-page
 #import "@preview/tiaoma:0.3.0"
-#import "@preview/touying:0.6.1": config-common, config-methods, config-page, config-store, only, pause, speaker-note, touying-set-config, utils
+#import "@preview/touying:0.6.1": config-common, config-methods, config-page, only, pause, speaker-note, touying-fn-wrapper, utils
 #import "@preview/metropolyst:0.1.0": config-info, metropolyst-theme, slide
 
 // Palette and split-page layout from OcelliQ/2026-04-ABC-Infrastructure. Keep colors in
@@ -111,16 +110,55 @@
   #body
 ]
 
-// Preserve the reference opening's historical event metadata and logo sizing.
-// Title, subtitle and author inherit the single deck configuration above.
-#let opening-theme(body) = touying-set-config(
-  utils.merge-dicts(
-    config-store(footer: none),
-    config-info(
-      date: "2026-04-18",
-      institution: [Ocellivision, A*STAR],
-      logo: image("assets/abc-opening/assets/icon-logo.svg", height: 1.5em),
-    ),
-  ),
-  body,
-)
+// Shared title layout uses the same palette and metadata as all other slides.
+#let half-page(lhs, rhs) = slide(
+  config: config-page(header: none, margin: (top: 0pt, right: 0pt, bottom: 0pt)),
+)[
+  #grid(
+    columns: (1.3fr, 1fr),
+    align: (left + horizon, center + horizon),
+    column-gutter: 1em,
+    lhs,
+    [
+      #block(fill: C.panel, width: 100%, height: 100%, stack(
+        place(horizon + center, rect(
+          fill: tiling(
+            size: (5.5cm, 6cm),
+            image("assets/bkg.svg", width: 5.5cm, height: 6cm),
+          ),
+          width: 100%,
+          height: 200%,
+        )),
+        rhs,
+      ))
+    ],
+  )
+]
+
+
+#let title-page() = touying-fn-wrapper((self: none) => {
+  let info = self.info
+  block(
+    inset: (x: 1em, y: 2em),
+    {
+      text(size: 1.6em, weight: 700, info.title)
+      v(0.4em)
+      if info.at("subtitle", default: none) != none {
+        text(size: 1.1em, fill: C.grey, info.subtitle)
+        v(0.8em)
+      }
+      if info.at("author", default: none) != none {
+        text(size: 1em, info.author)
+        linebreak()
+      }
+      if info.at("institution", default: none) != none {
+        text(size: 0.9em, fill: C.grey, info.institution)
+        linebreak()
+      }
+      if info.at("date", default: none) != none {
+        v(0.4em)
+        text(size: 0.9em, fill: C.grey, info.date)
+      }
+    },
+  )
+})

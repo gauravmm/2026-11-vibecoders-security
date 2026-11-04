@@ -1,11 +1,9 @@
-#import "theme.typ": opening-theme, theme
+#import "theme.typ": theme
 
 // Apply the deck-wide configuration once, before any slide content.
 #show: theme
 
-#opening-theme[
-  #include "opening.typ"
-]
+#include "opening.typ"
 #include "constrain.typ"
 #include "pace.typ"
 #include "observe.typ"

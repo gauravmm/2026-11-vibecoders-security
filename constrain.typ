@@ -79,20 +79,17 @@
     align: top,
     enum(
       spacing: 0.9em,
-      [Read broadly; write to a fixed, authorized destination.],
-      [Sensitive writes use narrow operations with deterministic checks.],
-      [Private reads restrict subsequent outputs.],
-      [The component reading hostile content gets no consequential tools.],
-      [Fix the workflow before reading untrusted material.],
+      [Keep credentials outside the agent's execution environment.],
+      [Enforce filesystem and network boundaries together.],
+      [Every route to the resource must cross the boundary.],
     ),
     enum(
-      start: 6,
+      start: 4,
       spacing: 0.9em,
-      [Bind permissions to authenticated identities, outside the model.],
-      [Keep privileged credentials outside the agent's execution environment.],
-      [Enforce filesystem and network boundaries together.],
-      [Authorize the exact mutation, immediately before execution.],
-      [Every route to the resource must cross the boundary.],
+      [Agents that read broadly write only to a fixed, authorized destination.],
+      [Agents that read private data have restricted subsequent outputs.],
+      [Agents that read hostile content get no consequential tools.],
+      [Sensitive writes use narrow operations with deterministic checks.],
     ),
   )
 ]
