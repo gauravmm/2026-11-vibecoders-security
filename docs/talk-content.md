@@ -114,7 +114,7 @@ Evidence provenance, authoritative guidance and alternatives are in [Observe res
 
 ## 6. Recover: stop harm and restore service — 3 minutes
 
-1. **Evidence:** GitLab's 2017 database-loss postmortem is explicitly labeled a human operational incident, not an AI incident. Recovery relied on an older staging copy; some database changes were lost, while repositories and wikis were not lost.
+1. **Evidence:** DataTalks.Club's operator postmortem describes Claude Code destroying production infrastructure and automated snapshots. AWS support recovered a snapshot; the operator reports service restoration in about 24 hours. Afterward he added separate backups and daily automated restore tests. The published restoration email is the slide's visual evidence.
 2. **Principles:** stop execution without model cooperation; protect recovery assets from agent authority; rehearse and verify restoration.
 3. **Patterns and practice:** independent stop; revoke credentials and quarantine jobs; protected versioned backups; separate code and data recovery; verify restoration before reconnecting; retain a receipt from a bounded UAT drill. The existing wheel remains beside these patterns.
 
@@ -132,11 +132,7 @@ Return to the original hook. Instead of relying on the agent remembering to beha
 |---|---|---|---|
 | Only the needed records and tools | Drafts, exact-action approval and execution caps | Tool history and adversarial regression tests | Independent stop control and tested restoration |
 
-Ask each founder to pick **one agent workflow** and one missing safeguard to implement this week. No inventory of every SaaS subscription, no new security department, no shopping list.
-
-**Closing line: “When the agent gets it wrong, your system should contain the mistake.”**
-
-Use the separate five-minute Q&A for tool-specific settings, refresh pipelines and implementation details.
+Close with the four safeguards applied to the inbox agent, then use the separate five-minute Q&A for tool-specific settings, refresh pipelines and implementation details. Collected references follow Q&A; there are no appendix slides.
 
 ## Editorial notes and references — outside the spoken content
 

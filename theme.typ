@@ -136,6 +136,20 @@
 ]
 
 
+// Reuse the title slide's QR panel on the conclusion.
+#let lecture-url = "https://gauravmanek.com/lectures/2026/vibecoders-security/"
+#let talk-code-panel() = grid(rows: auto, gutter: 1em)[
+  #box(fill: white, inset: 1em, radius: .25em, stroke: 2pt + rgb("#444"), link(lecture-url)[
+    #tiaoma.qrcode(
+      lecture-url,
+      options: (scale: 4.0),
+      width: 8cm,
+    )
+  ])
+][
+  *Talk and slides*
+]
+
 #let title-page() = touying-fn-wrapper((self: none) => {
   let info = self.info
   block(

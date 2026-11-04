@@ -1,24 +1,49 @@
 #import "theme.typ": *
+// cspell:words datatalks
 
 == 4. Recover: Stop Harm and Restore Service
 
-#slide()[
-  #big(size: 1.35em)[GitLab: the backup was missing.]
+#slide(
+  composer: (1fr, 1fr),
+  config: config-page(margin: (left: 0pt, bottom: 0pt)),
+)[
+  #layout(size => link("https://datatalks.club/", image(
+    "assets/recover/datatalks-website.png",
+    width: size.width,
+    height: size.height,
+    fit: "cover",
+    alt: "DataTalks.Club website: The place to talk about data.",
+  )))
+][
+  #v(1fr)
+  #big(size: 1.35em)[DataTalks.Club: recovery took 24 hours.]
   #v(0.4em)
   #small[
-    GitLab.com, 31 January 2017 · Human operational error; not an AI incident.#cite-source("https://about.gitlab.com/blog/postmortem-of-database-outage-of-january-31/")[GitLab. _Postmortem of database outage of January 31_. 10 February 2017. Sections: Database backups using pg_dump; Root cause analysis.]
+    26 February 2026 · Operator postmortem.#cite-source("https://aishippingblog.com/p/how-i-dropped-our-production-database")[Alexey Grigorev. _How I Dropped Our Production Database and Now Pay 10% More for AWS_. 6 March 2026. Recovery timeline and daily restore tests.]
   ]
   #v(0.65em)
-  #link("https://about.gitlab.com/blog/postmortem-of-database-outage-of-january-31/")[
-    #image("assets/recover/gitlab-backup-failure.png", width: 100%, height: 4.3cm, fit: "contain")
+  #link("https://aishippingblog.com/p/how-i-dropped-our-production-database")[
+    // Display the two recovery paragraphs; preserve the original published image.
+    #layout(size => block(
+      width: size.width,
+      height: size.width * 200 / 1202,
+      clip: true,
+      place(top + left, dy: -size.width * 95 / 1202, image(
+        "assets/recover/datatalks-aws-restoration.jpeg",
+        width: size.width,
+        height: size.width * 596 / 1202,
+        alt: "AWS support thanks the operator for waiting and confirms the restored snapshot is available.",
+      )),
+    ))
   ]
   #v(0.55em)
-  An engineer deleted the primary database directory.\
-  Recovery took about 18 hours; some database changes were lost.
+  Claude Code destroyed production infrastructure and automated snapshots.\
+  AWS support recovered a snapshot; the operator restored the service.
   #v(0.4em)
-  #small[Git repositories and wikis were not lost. Screenshot: GitLab's own postmortem.]
+  #small[Afterward: separate backups and daily automated restore tests.]
+  #v(1fr)
   #notes[
-    This is a recovery precedent, not evidence of agent failure rates. GitLab recovered using an older staging copy; that fortunate fallback does not make staging a backup strategy.
+    Website captured 4 November 2026, not the incident state. Operator account, not an independent execution trace. AWS recovered a snapshot unavailable in his console; provider assistance is not a guaranteed recovery path. His daily drill checked a read query, not a complete user flow. Shared infrastructure and permission choices were central to the incident.
   ]
 ]
 
@@ -26,7 +51,7 @@
   #principle(
     1,
     [Stop execution without the model's cooperation.],
-    [Disable tools, revoke credentials, and confirm queued and in-flight work has stopped.],
+    [Have mechanisms to disable tools & credentials, pause in-flight work.],
   )
   #v(0.55em)
   #principle(
@@ -41,10 +66,14 @@
     [Verify the data and a working user flow; measure time and lost work.],
   )
   #v(0.55em)
+  #principle(
+    4,
+    [Restoration cannot recall disclosed information.],
+    [Rotate leaked credentials, inform affected users promptly.],
+  )
+  #v(0.55em)
   #small[
     OWASP: emergency off-switches#cite-source("https://genai.owasp.org/download/49059/?tmstv=1753666640")[OWASP GenAI Security Project. _Securing Agentic Applications Guide_. Version 1.0, 28 July 2025, §4.1.4, printed p. 50.] · NCSC: protected, tested backups#cite-source("https://www.ncsc.gov.uk/guidance/mitigating-malware-and-ransomware-attacks")[UK National Cyber Security Centre. _Mitigating malware and ransomware attacks_. Action 1: make regular backups; accessed 4 November 2026.] · NIST: verified recovery#cite-source("https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-61r3.pdf")[NIST. _SP 800-61r3: Incident Response Recommendations and Considerations for Cybersecurity Risk Management_. April 2025. RC.RP-03--06, printed pp. 34--35.]
-    #v(0.35em)
-    #accent[Restoration cannot recall disclosed information.]
   ]
   #notes[
     Revocation need not cancel work a provider already accepted. Quarantine pending jobs and reconcile completed side effects before replay. Preserve evidence; close the failure path before reconnecting the restored service.

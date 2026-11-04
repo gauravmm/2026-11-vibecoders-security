@@ -8,19 +8,7 @@
   #title-page()
 
 ][
-  #grid(rows: auto, gutter: 1em)[
-    #box(fill: color.rgb("#fff"), inset: 1em, radius: .25em, stroke: 2pt + color.rgb("#444"), link(
-      "https://www.gauravmanek.com/lectures/2026/abc-infrastructure/",
-    )[
-      #tiaoma.qrcode(
-        "https://www.gauravmanek.com/lectures/2026/abc-infrastructure/",
-        options: (scale: 4.0),
-        width: 8cm,
-      )
-    ])
-  ][
-    *Original talk and code*
-  ]
+  #talk-code-panel()
 ]
 
 

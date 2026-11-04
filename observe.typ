@@ -1,4 +1,5 @@
 #import "theme.typ": *
+// cspell:words Langfuse Opik PyRIT abliterated Abliteration OrcaRouter evals webp
 
 == 3. Observe: Verify What Actually Happened
 
@@ -7,7 +8,11 @@
   width: size.width,
   height: size.width * ratio,
   clip: true,
-  place(top + left, dx: size.width * x, dy: size.width * y, image(path, width: size.width * scale, height: size.width * scale * source-ratio)),
+  place(top + left, dx: size.width * x, dy: size.width * y, image(
+    path,
+    width: size.width * scale,
+    height: size.width * scale * source-ratio,
+  )),
 ))
 
 #slide()[
@@ -21,14 +26,21 @@
       #v(0.4em)
       #observe-crop("assets/observe/openai-verifier-patch.png", ratio: 0.43, source-ratio: 577 / 510, y: -0.70)
       #v(0.3em)
-      #small[Original research trace: edits the verifier to return true.]
+      Original OpenAI research trace: model edits verifier to pass.
     ],
     [
       *Describes a demo. Submits.*#cite-source("https://www.anthropic.com/research/investigating-unintended-model-actions#submitting-a-form-it-should-not-have")[Anthropic. _Investigating unintended model actions in our evaluations and internal use_. 9 October 2026. “Submitting a form it should not have” and transcript-review findings.]
       #v(0.4em)
       #tag[PROVIDER-REPORTED EVALUATION INCIDENTS]
       #v(0.4em)
-      #observe-crop("assets/observe/anthropic-report-viewport.png", ratio: 0.30, scale: 2.37, source-ratio: 577 / 1280, x: -0.667, y: -0.474)
+      #observe-crop(
+        "assets/observe/anthropic-report-viewport.png",
+        ratio: 0.30,
+        scale: 2.37,
+        source-ratio: 577 / 1280,
+        x: -0.667,
+        y: -0.474,
+      )
       #v(0.65em)
       Transcript review uncovered unintended actions.
 
@@ -55,7 +67,7 @@
   #principle(
     3,
     [Continuously test the application and its boundaries.],
-    [Prove allowed actions work; test forbidden calls directly and through hostile inputs.],
+    [Test forbidden calls directly and through hostile inputs.],
   )
   #v(0.7em)
   #small[
@@ -70,16 +82,49 @@
   #enum(
     spacing: 0.8em,
     [Correlate tool requests, policy decisions and actual outcomes.],
-    [Export redacted audit logs the agent cannot rewrite.],
     [Alert a named owner to forbidden actions and missing telemetry.],
-    [Pair allowed actions with direct authorization tests.],
     [Automate multi-turn attacks through retrieved content and tools.],
     [Grade outcomes with checks the agent cannot change.],
-    [Replay failures after model, prompt or connector changes.],
+    [Rerun evals after changes.],
   )
   #v(0.5em)
-  #small[A passing suite covers tested cases; it does not prove safety.]
   #notes[
     Attack drivers such as PyRIT or Promptfoo must target the integrated application and real input surfaces. Use synthetic data and test destinations; repeat stochastic attacks and retain failing inputs with configuration versions. Check backend authorization separately from model behavior. A critical failure is not cancelled by a high average pass rate.
   ]
+]
+
+#slide(
+  title: [Observe: Instrument and attack-test],
+  composer: (1fr, 1.5fr),
+  config: config-page(margin: (right: 0pt, bottom: 0pt)),
+)[
+  #v(1fr)
+  #accent[*Observability*]
+  #v(0.35em)
+  *Langfuse*#cite-source("https://langfuse.com/docs/observability/overview")[Langfuse. _AI Observability & Application Tracing_. Official documentation; accessed 4 November 2026.] · *Opik*#cite-source("https://www.comet.com/docs/opik/tracing/overview")[Comet. _Opik: Observability Overview_. Official documentation and trace screenshot; accessed 4 November 2026.] · *Phoenix*#cite-source("https://arize.com/docs/phoenix")[Arize. _What is Arize Phoenix?_. Official documentation; accessed 4 November 2026.]\
+  LLM traces and evaluations.
+
+  *Jaeger*#cite-source("https://www.jaegertracing.io/")[Jaeger. _Open source, distributed tracing platform_. Official project site; accessed 4 November 2026.]\
+  Distributed request tracing.
+
+  #v(0.8em)
+  #accent[*Prompt fuzzing / red teaming*]
+  #v(0.35em)
+  *Promptfoo*#cite-source("https://www.promptfoo.dev/docs/red-team/")[Promptfoo. _LLM red teaming_. Official documentation; accessed 4 November 2026.] · *PyRIT*#cite-source("https://github.com/microsoft/PyRIT")[Microsoft. _PyRIT: AI red teaming for models and applications_. Official repository; accessed 4 November 2026.] · *garak*#cite-source("https://github.com/NVIDIA/garak")[NVIDIA. _garak: the LLM vulnerability scanner_. Official repository; accessed 4 November 2026.]\
+  Automated adversarial testing.
+
+  *Abliterated LLMs* as attackers\
+  e.g. served by *OrcaRouter*.#cite-source("https://www.orcarouter.ai/blog/how-abliteration-works")[OrcaRouter. _Abliteration, Explained: How Refusal Removal Works Without Any Training_. 17 August 2026. Research and red-teaming applications.]
+  #v(1fr)
+  #notes[
+    Jaeger traces services; LLM-specific scoring needs additional instrumentation. Abliteration reduces refusal behavior, not a guarantee of stronger attacks. Evaluate the application with independent outcome checks, including when the model cooperates with the attacker.
+  ]
+][
+  #layout(size => link("https://www.comet.com/docs/opik/tracing/overview", image(
+    "assets/observe/opik-trace.webp",
+    width: size.width,
+    height: size.height,
+    fit: "cover",
+    alt: "Opik trace inspector showing nested agent spans, messages and an execution graph.",
+  )))
 ]

@@ -39,7 +39,7 @@ Typst symbol such as `#sym.dash.em` instead of writing the literal character.
 - `slides.typ` — entry point: applies the shared theme once, then includes the sections in presentation order.
 - `theme.typ` — deck-wide metadata, colors, typography, presenter-note layout and reusable styles.
 - `constrain.typ`, `pace.typ`, `observe.typ`, `recover.typ` — one editable content file per principle.
-- `closing.typ` — closing slides, Q&A, appendices and collected references.
+- `closing.typ` — closing slide, Q&A and collected references.
 - `citations.typ` — linked superscript citations, deduplicated by URL/key, with automatic reference slides.
 - `blocks.typ` — grey and outlined blocks; both accept `center: true`.
 - `principles.typ` — numbered principle rows with optional examples.
@@ -64,7 +64,7 @@ The section files preserve speaker notes; splitting content does not rewrite the
 
 The personal introduction follows the title slide, adapted from the “About Me” slide in `ai-for-clm/01-intro/slides.typ` with the original portrait, credentials and contact links.
 
-The deck is intended for a 20-minute talk, followed by a separate five-minute Q&A and optional implementation appendices. The opening was adapted from the April ABC Infrastructure deck, through “When Designing Infrastructure”, retaining its QR target, incident imagery, layouts and pause builds. It now uses the unified presentation theme and current talk metadata. The shared title layout lives in `theme.typ`; the original helper remains archived under `assets/abc-opening/`. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
+The deck is intended for a 20-minute talk, followed by a separate five-minute Q&A. The opening was adapted from the April ABC Infrastructure deck, through “When Designing Infrastructure”, retaining its incident imagery, layouts and pause builds. It now uses the unified presentation theme and current talk metadata. The title and conclusion share the split layout and QR panel in `theme.typ`, linking to [this lecture's page](https://gauravmanek.com/lectures/2026/vibecoders-security/); the original helper remains archived under `assets/abc-opening/`. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
 
 Speaker notes contain concise lecture cues and non-obvious evidence limits. Detailed sources and procedures remain in the numbered references and `docs/`. Historical incident claims and the original “OWASP's STRIDE” wording remain verbatim on audience slides; notes contextualize them. `make notes` renders native Touying notes beside each slide; the audience PDF also carries presenter metadata. The notes PDF is for presenter/review use.
 
@@ -77,6 +77,6 @@ Citations and the numbered principles design come from the AI for Leaders instru
 [AI for Leaders](https://github.com/OcelliQ/ai-for-leaders). The citation helper is adapted
 to this deck's existing Touying/Metropolyst versions. Write the full reference in
 `#cite-source("URL")[Author. _Title_. Date.]` at the claim; repeated URLs reuse their
-number. `#reference-slides()` collects references after the appendix. Register any
+number. `#reference-slides()` collects references after Q&A. Register any
 notes-only source outside `#notes` with `display: false` so it also appears in the
 audience PDF. Presenter notes retain the evidence limits and source context.

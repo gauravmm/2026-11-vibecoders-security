@@ -13,6 +13,7 @@
     row-gutter: 0.45em,
     align: center,
     [*Acts before permission.*#cite-source("https://x.com/jasonlk/status/1946069562723897802")[Jason Lemkin. _Replit deletes a database during a code freeze_. Public user report, 18 July 2025.]], [*Thinks beyond useful limits.*#cite-source("https://www.anthropic.com/research/april-23-postmortem")[Anthropic. _An update on recent Claude Code quality reports_. 23 April 2026. Section: A change to Claude Code's default reasoning effort.]],
+
     layout(frame => link("https://x.com/jasonlk/status/1946069562723897802", image(
       "assets/replit.png",
       width: frame.width,
@@ -64,12 +65,10 @@
   #enum(
     spacing: 0.9em,
     [Draft → preview → approve → execute.],
-    [Bind expiring, single-use approval to the exact action.],
-    [Deny execution when required approval is unavailable.],
-    [Use one shared budget for the task, retries and sub-agents.],
+    [Approvals are expiring, single-use, and bound to the exact agent and action.],
     [Cap retries and deduplicate consequential requests.],
     [Start with a small batch; approve expansion.],
-    [Enforce spend and runtime caps before starting more work.],
+    [Enforce spend and runtime caps.],
   )
   #notes[
     An expired or consumed approval cannot authorize a new attempt. Retrying the same operation needs durable execution state and an idempotency key, not a second side effect. A timeout does not prove the first request failed.

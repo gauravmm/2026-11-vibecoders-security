@@ -63,12 +63,17 @@
   #enum(
     spacing: 0.9em,
     [Keep credentials outside the agent's execution environment.],
-    [Enforce filesystem and network boundaries together.],
-    [Every route to the resource must cross the boundary.],
+    [Every route to the agent must cross a security boundary.],
+    [Sensitive writes use narrow operations with deterministic checks.],
+  )
+  #v(0.7em)
+  #accent[*Common strategies*]
+  #v(0.4em)
+  #list(
+    spacing: 0.6em,
     [Agents that read broadly write only to a fixed, authorized destination.],
     [Agents that read private data have restricted subsequent outputs.],
     [Agents that read hostile content get no consequential tools.],
-    [Sensitive writes use narrow operations with deterministic checks.],
   )
   #notes[
     An untrusted reader can prepare draft data for a separate, narrowly authorized executor. The executor applies policy and exact-action approval; forwarding unrestricted reader output as instructions defeats the separation.
