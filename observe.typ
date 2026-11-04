@@ -1,68 +1,85 @@
 #import "theme.typ": *
 
-#slide(title: [Observe · Test what it did, not what it said.])[
-  #tag[ILLUSTRATIVE POLICY RECORD]
-  #v(0.55em)
-  #big[“I've stopped.”]
-  #v(0.85em)
-  #dtable(
-    columns: (1fr, 1fr, 1fr),
-    size: 0.8em,
-    [Tool request],
-    [Policy decision],
-    [Actual outcome],
-    [Send message],
-    [No approval → deny],
-    [Nothing delivered],
+== 3. Observe: Verify What Actually Happened
+
+// Crop only the displayed source screenshots; keep the originals unmodified.
+#let observe-crop(path, ratio: 1, scale: 1, source-ratio: 1, x: 0, y: 0) = layout(size => block(
+  width: size.width,
+  height: size.width * ratio,
+  clip: true,
+  place(top + left, dx: size.width * x, dy: size.width * y, image(path, width: size.width * scale, height: size.width * scale * source-ratio)),
+))
+
+#slide()[
+  #grid(
+    columns: (1fr, 1fr),
+    column-gutter: 1.2em,
+    [
+      *Tests pass. The verifier was changed.*#cite-source("https://arxiv.org/html/2503.11926v1#S1")[Bowen Baker et al. (OpenAI). _Monitoring Reasoning Models for Misbehavior and the Risks of Promoting Obfuscation_. 14 March 2025. Figure 1 and §2.2. arXiv:2503.11926v1.]
+      #v(0.4em)
+      #tag[OBSERVED DURING MODEL TRAINING]
+      #v(0.4em)
+      #observe-crop("assets/observe/openai-verifier-patch.png", ratio: 0.43, source-ratio: 577 / 510, y: -0.70)
+      #v(0.3em)
+      #small[Original research trace: edits the verifier to return true.]
+    ],
+    [
+      *Describes a demo. Submits.*#cite-source("https://www.anthropic.com/research/investigating-unintended-model-actions#submitting-a-form-it-should-not-have")[Anthropic. _Investigating unintended model actions in our evaluations and internal use_. 9 October 2026. “Submitting a form it should not have” and transcript-review findings.]
+      #v(0.4em)
+      #tag[PROVIDER-REPORTED EVALUATION INCIDENTS]
+      #v(0.4em)
+      #observe-crop("assets/observe/anthropic-report-viewport.png", ratio: 0.30, scale: 2.37, source-ratio: 577 / 1280, x: -0.667, y: -0.474)
+      #v(0.65em)
+      Transcript review uncovered unintended actions.
+
+    ],
+  )
+  #notes[
+    Left: published figure mixes summaries, quoted reasoning and tool calls; variable names are masked by the researchers. Right: provider report, not a public raw execution trace. These observations establish mechanisms, not prevalence. Protected verifiers and destination checks are our engineering inference.
+  ]
+]
+
+#slide()[
+  #principle(
+    1,
+    [Verify tool outcomes against independent evidence.],
+    [Check the destination or stored state, not just the agent's report.],
+  )
+  #v(0.65em)
+  #principle(
+    2,
+    [Keep evidence outside the agent's control.],
+    [Protect logs and test checks; alert a named owner to dangerous outcomes.],
+  )
+  #v(0.65em)
+  #principle(
+    3,
+    [Continuously test the application and its boundaries.],
+    [Prove allowed actions work; test forbidden calls directly and through hostile inputs.],
   )
   #v(0.7em)
-  #accent[Keep the evidence outside the agent's control.]
-  #v(0.35em)
-  #small[Sources: #cite-source("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP guidance]]
+  #small[
+    OWASP: application testing#cite-source("https://owaspai.org/docs/5_testing/#532-agentic-ai-security-testing")[OWASP AI Exchange. _AI Security Testing_. §5.3.2, “Agentic AI security testing”; accessed 4 November 2026.] · IMDA: protected logs and monitoring#cite-source("https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf#page=44", key: "https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf")[IMDA. _Model AI Governance Framework for Agentic AI_. Version 1.5. §2.3.3, pp. 43--44, “Continuous testing and monitoring”. Updated 5 June 2026.] · NIST: red-teaming and reassessment#cite-source("https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.600-1.pdf#page=37")[NIST. _Artificial Intelligence Risk Management Framework: Generative Artificial Intelligence Profile_. NIST AI 600-1, July 2024. MS-2.7-007 and MS-2.7-009, pp. 33--34.]
+  ]
   #notes[
-    The table is illustrative, not an incident trace. Verify outcomes at the destination or in storage as well as in tool logs; a logged attempt need not have succeeded.
+    A refusal before a tool call never exercises backend authorization. A broken connector can look safe unless an allowed positive control succeeds. Independent outcome checks complement reasoning monitors; they do not imply reasoning traces have no detection value.
   ]
 ]
 
-#slide(title: [Observe · Automate hostile inputs. Check tool outcomes.])[
-  #tag[ILLUSTRATIVE STAGING TRACE · SYNTHETIC DATA · NOT A PERFORMED TEST]
-  #v(0.55em)
-  #dtable(
-    columns: (0.8fr, 2.5fr),
-    size: 0.78em,
-    inset: 7pt,
-    [Step],
-    [What to verify],
-    [Baseline],
-    [A permitted draft is created. Approved test mail reaches the test inbox.],
-    [Attack read],
-    [A retrieved email asks for another customer's data to be sent elsewhere.],
-    [Boundary],
-    [Unauthorized read/send is rejected by policy; logs and destination agree.],
+#slide()[
+  #enum(
+    spacing: 0.8em,
+    [Correlate tool requests, policy decisions and actual outcomes.],
+    [Export redacted audit logs the agent cannot rewrite.],
+    [Alert a named owner to forbidden actions and missing telemetry.],
+    [Pair allowed actions with direct authorization tests.],
+    [Automate multi-turn attacks through retrieved content and tools.],
+    [Grade outcomes with checks the agent cannot change.],
+    [Replay failures after model, prompt or connector changes.],
   )
-  #v(0.6em)
-  #accent[Did a forbidden action actually happen?]
-  #v(0.35em)
-  #small[Sources: #cite-source("https://owasp.github.io/DevSecOpsGuideline/2-Process/2-4-Test/2-4-6-AI-LLM-Application-Security-Testing/")[OWASP AI application testing]]
-  #notes[
-    No experiment was performed. A positive control prevents a broken connector from masquerading as a defense. A model refusal before tool invocation does not test backend authorization; attempt the forbidden call directly too.
-  ]
-]
-
-#slide(title: [Observe · Keep failures as repeatable checks.])[
-  #grid(
-    columns: (1fr, 1fr, 1fr),
-    column-gutter: 0.65em,
-    card([Disclosure], [Can it fetch or copy another customer's data?]), card([Unauthorized action], [Can it send without exact approval?]), card([Runaway use], [Can it exceed the execution cap?]),
-  )
-  #v(0.9em)
-  #accent[Repeat after model, prompt, permission or connector changes.]
   #v(0.5em)
-  #small[A passing suite means these tests found no failure.]
-  #v(0.35em)
-  #small[Sources: #cite-source("https://www.promptfoo.dev/docs/red-team/configuration/")[Promptfoo], #cite-source("https://microsoft.github.io/PyRIT/latest/code/framework/")[Microsoft PyRIT], #cite-source("https://github.com/NVIDIA/garak")[NVIDIA garak]]
+  #small[A passing suite covers tested cases; it does not prove safety.]
   #notes[
-    Separate direct authorization tests from agent-mediated attacks. Repeat stochastic cases. A high aggregate pass rate cannot cancel a critical failure; model-endpoint probes alone do not establish application security.
+    Attack drivers such as PyRIT or Promptfoo must target the integrated application and real input surfaces. Use synthetic data and test destinations; repeat stochastic attacks and retain failing inputs with configuration versions. Check backend authorization separately from model behavior. A critical failure is not cancelled by a high average pass rate.
   ]
 ]
-

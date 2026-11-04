@@ -11,7 +11,7 @@
     column-gutter: 0pt,
     row-gutter: 0.5em,
     align: center,
-    [*Mistake: deletes the inbox.*#cite-source("https://www.tomshardware.com/tech-industry/artificial-intelligence/openclaw-wipes-inbox-of-meta-ai-alignment-director-executive-finds-out-the-hard-way-how-spectacularly-efficient-ai-tool-is-at-maintaining-her-inbox")[Tom's Hardware. _OpenClaw wipes inbox despite stop commands_. 24 February 2026.]], [*Injection: publishes private data.*#cite-source("https://invariantlabs.ai/blog/mcp-github-vulnerability")[Invariant Labs disclosure, 26 May 2025]],
+    [*Mistake: deletes the inbox.*#cite-source("https://www.tomshardware.com/tech-industry/artificial-intelligence/openclaw-wipes-inbox-of-meta-ai-alignment-director-executive-finds-out-the-hard-way-how-spectacularly-efficient-ai-tool-is-at-maintaining-her-inbox")[Tom's Hardware. _OpenClaw wipes inbox despite stop commands_. 24 February 2026.]\ #small[User-reported incident]], [*Injection: publishes private data.*#cite-source("https://invariantlabs.ai/blog/mcp-github-vulnerability")[Invariant Labs disclosure, 26 May 2025]\ #small[Research demonstration]],
 
     layout(frame => link("https://x.com/summeryue0/status/2025774069124399363", image(
       "assets/meta_email.png",
@@ -70,4 +70,7 @@
     [Agents that read hostile content get no consequential tools.],
     [Sensitive writes use narrow operations with deterministic checks.],
   )
+  #notes[
+    An untrusted reader can prepare draft data for a separate, narrowly authorized executor. The executor applies policy and exact-action approval; forwarding unrestricted reader output as instructions defeats the separation.
+  ]
 ]

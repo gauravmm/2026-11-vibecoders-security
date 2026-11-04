@@ -4,9 +4,13 @@ Research snapshot: **2 November 2026**. Three Luna agents researched SaaS contro
 
 ## Talk for teams of 1–5
 
+[Slide-development process](slide-development-process.md) documents the Constrain workflow and its application to Pace, Observe and Recover: research failures, select visual evidence, extract principles, research implementation patterns, edit for delivery, then review the complete sequence.
+
 [AI-security talk content](talk-content.md) adapts the hook and setup of the April ABC Infrastructure talk into **20 minutes of speaking plus 5 minutes of Q&A**. Its frame is Constrain, Pace, Observe, Recover. It includes automated red-teaming and AI-focused UAT recovery drills.
 
-The first slide cut is in [`slides.typ`](../slides.typ), with native presenter notes (`make notes`). Its [Grok adversarial review and dispositions](slides-adversarial-review.md) cover sequencing and content coverage, counting the notes as part of the material.
+The current deck is in [`slides.typ`](../slides.typ), with one file per principle and native presenter notes (`make notes`). New primary-source evidence, editorial decisions and implementation patterns are documented for [Pace](pace-research.md), [Observe](observe-research.md) and [Recover](recover-research.md). The [earlier Grok review](slides-adversarial-review.md) predates these section revisions.
+
+The [full-sequence Astra review and dispositions](sequence-adversarial-review.md) covers the revised opening, four principles and closing.
 
 The [earlier takeaway](talk-takeaway.md) and [Astra adversarial review](talk-adversarial-review.md) reflect the previous broader scope and have not been updated or repeated for this rewrite. The [recovery recipe](recovery-drill.md) remains optional implementation background for environment separation, sanitized data refreshes and backup drills. The research below retains its broader AI/SaaS scope as an evidence library.
 

@@ -6,9 +6,6 @@
 
 #half-page[
   #title-page()
-  #notes[
-    The QR code still points to the April Infrastructure talk.
-  ]
 
 ][
   #grid(rows: auto, gutter: 1em)[
@@ -22,7 +19,7 @@
       )
     ])
   ][
-    *Slides and Code*
+    *Original talk and code*
   ]
 ]
 
@@ -78,7 +75,9 @@
     User-reported account; permanent loss and a compaction root cause were not independently established. Chat stop commands did not halt the reported run.
   ]
   #v(1fr)
-  *Meta's director of AI alignment lost her emails.*#cite-source("https://simonwillison.net/2026/Feb/23/summer-yue/")[Summer Yue account, reproduced by Simon Willison. 23 February 2026.]
+  *Summer Yue reported her agent deleting emails.*#cite-source("https://simonwillison.net/2026/Feb/23/summer-yue/")[Summer Yue account, reproduced by Simon Willison. 23 February 2026.]
+  #v(0.35em)
+  #small[User-reported incident]
   #v(1fr)
   _I had to run to my Mac mini like I was defusing a bomb._
 
@@ -116,6 +115,8 @@
 
   #v(1em)
   *Nobody inspected the test email.*
+  #v(0.35em)
+  #small[AI-assisted marketing script; not an autonomous agent.]
 
   #v(1fr)
 ][
@@ -221,7 +222,7 @@
   principle(1, [Constrain], [Limit access and authority.]),
   principle(2, [Pace], [Use approvals and action limits.]),
   principle(3, [Observe], [Verify actual tool outcomes.]),
-  principle(4, [Recover], [Test your backups.]),
+  principle(4, [Recover], [Stop harm; rehearse recovery.]),
 )
 
 #grid(

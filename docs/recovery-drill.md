@@ -49,7 +49,9 @@ Before the spin, choose an eligible UAT resource, a known-good baseline, an expe
 | Deleted records | Delete seeded test records or a disposable test table. | Restore from the UAT backup; compare known records and relationships, then run the application workflow. |
 | Bad deployment | Deploy a controlled failing build. | Redeploy the known-good version and check data compatibility. Rehearse data migrations separately; code rollback does not undo every schema change. |
 | Revoked key | Revoke one disposable integration credential. | Confirm denial, issue a replacement test credential, restore service, and confirm the old credential remains rejected. |
-| Unavailable AI provider | Simulate timeouts or errors at a test adapter. | Verify bounded retries, a useful error/fallback or queue, no duplicate side effects, and recovery when the simulation ends. |
+| Runaway agent | Use a bounded test worker that repeatedly attempts a harmless UAT action; trigger the independent emergency stop. | Verify dispatch stops, affected credentials are rejected, pending jobs are quarantined and accepted work is reconciled before deliberate resumption. |
+
+An additional candidate is an unavailable AI provider: simulate timeouts or errors at a test adapter and verify bounded retries, a useful error/fallback, no duplicate side effects, and recovery when the simulation ends. The four wedges above match the slide wheel.
 
 The baseline workflow must work before injection, and the expected failure must actually occur. Otherwise, record the drill as invalid, not passed. Stop on unexpected effects, restore the environment, and retain evidence.
 

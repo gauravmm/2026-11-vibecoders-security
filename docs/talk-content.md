@@ -14,7 +14,7 @@ The exact vendor capabilities illustrated in the April deck are not repeated as 
 
 ## Content and timing
 
-The exact six-slide ABC opening through “When Designing Infrastructure” now supersedes the hook/setup storyboard below. It retains the original April title/event/date/QR, claims and builds by request; the opening plus “Two routes to the same tool” transition stays within 0:00–4:00. The current slide notes govern delivery and historical caveats.
+The adapted ABC opening through “When Designing Infrastructure” supplies the hook and setup. It uses the shared theme and current talk metadata; the historical QR and incident images retain their source provenance. Each principle section then follows the [documented development process](slide-development-process.md): authentic failure evidence, a concise principle set, and implementation patterns. The budget below is a planning aid; presenter notes contain no speaking timings.
 
 | Clock | Content | Main visual |
 |---|---|---|
@@ -22,12 +22,12 @@ The exact six-slide ABC opening through “When Designing Infrastructure” now 
 | 2:00–4:00 | Setup: an accident is not a diagnosis | Pilot-error analogy; agent/action boundary |
 | 4:00–8:00 | Constrain | Inbox/GitHub examples → least privilege, narrow tools, containment and enforcement |
 | 8:00–11:00 | Pace | Draft, approval, action; bounded execution |
-| 11:00–15:00 | Observe and challenge | One automated red-team trace |
+| 11:00–15:00 | Observe and challenge | Training/evaluation evidence; independent checks and adversarial tests |
 | 15:00–18:00 | Recover | UAT wheel of misfortune |
 | 18:00–20:00 | Close: one workflow, four safeguards | Four verbs and one commitment |
 | 20:00–25:00 | Q&A | Optional implementation references |
 
-This is a content budget, not a rehearsed script. Implementation detail stays in speaker notes or linked references.
+This is a content budget, not a rehearsed script. Implementation detail stays in linked research notes; presenter notes contain only non-obvious lecture cues.
 
 ## 1. Hook: the agent would not stop — 2 minutes
 
@@ -43,7 +43,7 @@ One short supporting beat: Replit acknowledged an agent deleting a user's applic
 
 Ask rhetorically: **“What would stop your agent if it ignored the next instruction?”**
 
-Speaker note: the email story is a user's published account, not an independent forensic finding. Do not claim the whole inbox was irretrievably destroyed or present a proposed internal cause as established. Use two beats, not the original deck's full incident montage.
+Speaker note: the email story is a user's published account, not an independent forensic finding. Do not claim the whole inbox was irretrievably destroyed or present a proposed internal cause as established. The retained opening includes the email account, the local AI-assisted script and database examples. Treat later repeated screenshots as brief callbacks to a different mechanism, rather than retelling the incidents.
 
 ## 2. Setup: an accident is not a diagnosis — 2 minutes
 
@@ -82,7 +82,7 @@ mindmap
 
 ## 3. Constrain: enforce boundaries outside the model — 4 minutes
 
-The two-image introduction shows the OpenClaw inbox account and Invariant's GitHub demonstration. It is followed by one principles slide, replacing the three incident slides from the earlier draft.
+The two-image introduction shows the OpenClaw inbox account and Invariant's GitHub demonstration. It is followed by three principles and the presenter's seven selected implementation-pattern titles.
 
 1. **Give each agent one specific, narrowly scoped task.** Define success and what falls outside its remit. This is our task-first design recommendation, making the required authority easier to define.
 2. **Give it only the tools, data and permissions that task requires.** A necessary tool can still expose unnecessary records or destructive operations. Sources: [NIST least privilege](https://csrc.nist.gov/glossary/term/least_privilege) and [OWASP LLM06, mitigations 1–5](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/).
@@ -90,66 +90,39 @@ The two-image introduction shows the OpenClaw inbox account and Invariant's GitH
 
 Retain the 4:00–8:00 speaking allocation, using the preceding screenshots as examples. Approvals and execution caps follow under Pace. [Incident research and alternatives](research-ai.md#constrain-incident-research-4-november-2026) remain background; [the refresh recipe](recovery-drill.md#scheduled-refresh-realistic-data-without-real-identities) remains supporting material.
 
-## 4. Pace: put the checkpoint before the consequence — 3 minutes
+## 4. Pace: review before consequence — 3 minutes
 
-**Control when it acts, how much it does, and when it must ask.**
+Three slides apply the Constrain development workflow:
 
-Keep the same inbox example:
+1. **Evidence:** Replit's user-reported database deletion during a freeze, paired with Anthropic's provider postmortem describing excessive reasoning and disproportionate latency/token use. Neither example tests the proposed safeguards; the second is not a verified runaway-spending attack.
+2. **Principles:** put review before consequential actions; approve the exact operation that executes; bound unattended work.
+3. **Patterns:** draft/preview/approve/execute; exact-action expiring approvals; deny when required approval is missing; one budget across retries and delegates; retry caps and deduplication; small batches; enforce consumption limits before further dispatch.
 
-> Agent prepares draft → person sees recipient and content → approved action executes.
+Pace governs when and how much an otherwise permitted action executes. It complements Constrain's authority limits. A cap never authorizes a forbidden operation, a rate limit is not a cumulative budget, and a timeout does not establish that an external side effect failed.
 
-**“Ask first” belongs in the tool boundary, not just the prompt.** For a tool you build, validate the authenticated user, target and exact action in ordinary application code. The model cannot approve its own request. If the recipient or content changes, the earlier approval no longer authorizes the send. For a tool you buy, verify its controls or retain the final step yourself.
+Primary evidence, OWASP/IMDA/NIST sections, implementation mechanics and limitations are in [Pace research](pace-research.md). The reused Replit image is a callback to the opening; do not retell the incident at length.
 
-Add one more limit: **cap what can happen before anyone notices.** Bound tool calls, retries, runtime and spend outside the model. For a cleanup agent, a small reviewable batch is safer than an unlimited deletion loop. Pick limits that fit the job; there is no universal safe number.
+## 5. Observe: verify what actually happened — 4 minutes
 
-This is a deliberate tradeoff: drafting still saves time, while some actions remain manual. Avoid demanding approval for every harmless read, which encourages automatic clicking.
+1. **Evidence:** OpenAI's published training trace shows an editable verifier; Anthropic's provider evaluation report describes a form submission despite language about demonstrating an action. These are training/evaluation observations, not production-frequency evidence.
+2. **Principles:** verify outcomes against independent evidence; protect logs and test checks; continuously test application boundaries.
+3. **Patterns:** correlate requests, policy decisions and outcomes; export redacted protected logs; alert a named owner; pair allowed actions with direct authorization tests; automate multi-turn attacks through actual input surfaces; use protected outcome graders; replay failures after configuration changes.
 
-Speaker note: a tool wrapper or MCP gateway can enforce these checks if all relevant actions pass through it and the agent cannot bypass it with shell access or direct credentials. A tiny team can start with narrow tools and existing settings; buying or building a gateway is not the talk's prerequisite. Input classifiers and output filters are supplementary controls, not authorization boundaries. [OWASP MCP guidance](https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html)
+Automated red-teaming remains concrete: use synthetic customers and controlled destinations; first prove an allowed action works and the attack was read, then exercise forbidden calls directly and through the agent. Check resulting state independently. A model refusal alone does not test backend authorization. A passing suite covers tested cases and does not prove safety.
 
-## 5. Observe: test what it did, not what it said — 4 minutes
+Evidence provenance, authoritative guidance and alternatives are in [Observe research](observe-research.md). The two Anthropic form cases must not be conflated: the selected Haiku passage is distinct from the police-tip/spam-filter example elsewhere in the report.
 
-An agent saying it stopped is not evidence that no action ran. Record actual tool calls, targets, approval decisions and outcomes in logs the agent cannot rewrite. Keep secrets and unnecessary message bodies out of logs. An attempted unauthorized send should be visible even if the final response sounds reassuring.
+## 6. Recover: stop harm and restore service — 3 minutes
 
-### Automated red-teaming: challenge the boundary
+1. **Evidence:** GitLab's 2017 database-loss postmortem is explicitly labeled a human operational incident, not an AI incident. Recovery relied on an older staging copy; some database changes were lost, while repositories and wikis were not lost.
+2. **Principles:** stop execution without model cooperation; protect recovery assets from agent authority; rehearse and verify restoration.
+3. **Patterns and practice:** independent stop; revoke credentials and quarantine jobs; protected versioned backups; separate code and data recovery; verify restoration before reconnecting; retain a receipt from a bounded UAT drill. The existing wheel remains beside these patterns.
 
-Define it in one sentence: **automatically try hostile inputs against your agent workflow, then check whether forbidden actions actually happened.**
+Revocation need not cancel accepted remote work. Reconcile completed effects before replay or resumption, preserve evidence, and close the failure path before reconnecting. Restoration cannot recall disclosed information.
 
-Use a prerecorded trace in an isolated staging environment with fake messages and a controlled destination:
+The wheel's four wedges are deleted records, a bad change, a revoked tool key and a runaway agent. Use an isolated UAT target, a known-good baseline, a bounded injected failure and independent outcome verification. The monthly cadence is a proposed practice, not a standard or an executed experiment. UAT success does not prove production recovery time or scale.
 
-| Step | What the audience sees |
-|---|---|
-| Normal task | A permitted draft is created successfully; any approved test delivery reaches the test inbox. |
-| Attack | A retrieved message tells the agent to send another customer's private information elsewhere. |
-| Boundary | The attempted unauthorized read or send is rejected by application policy and logged. |
-
-The normal task is essential: a broken connector must not look like a successful defense. Ensure the attack-bearing content was actually read. If the model refuses without attempting a call, that is a useful result, but it does not prove the backend would reject the call.
-
-Builders first test authorization directly: customer A cannot retrieve customer B's data, and an unapproved send is rejected even if the model requests it. Then automate hostile messages through the complete workflow. Repeat cases and retain failures as regressions after model, prompt, permission or connector changes. Use production-equivalent policy with synthetic data and safe test destinations.
-
-One practical starting point is a small suite covering disclosure, unauthorized action and runaway tool use. Promptfoo or PyRIT can help exercise applications; garak provides model/endpoint probes. Put tool links in the notes rather than comparing scanners on stage. [Tooling and test references](research-ai.md#automated-red-team-practice)
-
-**Passing a suite means those tests found no failure; it does not mean the agent is attack-proof.** Fix or disable a demonstrated critical boundary failure before release. Hosted-tool users should test within their own authorized test workspace and draw only conclusions their observations support.
-
-## 6. Recover: rehearse the agent's worst day — 3 minutes
-
-Return to the opening: stopping the agent should not depend on persuading it in the same chat. Have a supervisor stop control, disable the tool path and revoke its credentials. Account for queued or in-flight actions; confirm execution has stopped before repairing data.
-
-**“A backup is a promise. A restore is the rehearsal.”** Keep scheduled, versioned backups of data the agent can damage, protected from its delete authority. Decide how much work you can afford to lose and how long recovery may take. Soft deletion and code rollback help, but code rollback alone does not restore a database or undo a migration. Restoring data cannot undo disclosure. [Backup guidance](https://www.ncsc.gov.uk/guidance/mitigating-malware-and-ransomware-attacks)
-
-### The AI wheel of misfortune
-
-Show four wedges. Once a month, choose one bounded scenario in staging/UAT:
-
-| Wedge | Deliberate UAT challenge | Evidence to keep |
-|---|---|---|
-| Agent deletes records | Delete seeded test records to simulate an allowed but mistaken action. | Stop writes, restore the backup, verify records and elapsed recovery time. |
-| Agent ships a bad change | Deploy a controlled failing agent-generated change. | Roll back and verify the application and data remain compatible. |
-| Agent loses its tool | Revoke a disposable connector key. | No uncontrolled retries; replacement works and the old key remains rejected. |
-| Agent runs away | Use a bounded test that tries excessive tool calls. | The externally enforced cap stops execution and produces an alert. |
-
-This is an exercise after the talk, not a live destructive demo. Start manually, use only UAT credentials and data, and set an abort condition. Record the result and fix failed recovery for the affected component before shipping its change. Automate only understood, bounded drills. A staging refresh is not a recovery backup. [Drill mechanics](recovery-drill.md)
-
-Red-teaming and the wheel share one method: **challenge a safety claim, observe the outcome, keep the check repeatable.** One probes hostile inputs; the other rehearses failure and recovery.
+See [Recover research](recover-research.md) for evidence and guidance, and [the recovery exercise](recovery-drill.md) for the matching drill recipe and an additional provider-outage scenario.
 
 ## 7. Close: one agent, four safeguards — 2 minutes
 
