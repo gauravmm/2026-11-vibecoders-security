@@ -34,19 +34,22 @@
   ]
 ]
 
-#slide()[
+#principles-examples[
+  #accent[*Principles*]
+  #v(0.45em)
+
   #principle(
     1,
-    [Put human review before consequential actions.],
+    [Human review before consequential actions.],
     [Send, pay, publish, delete: decide which steps require approval.],
   )
-  #v(0.65em)
+  #v(0.45em)
   #principle(
     2,
     [Approve the exact action that will execute.],
     [Show the target, contents and impact. Changes require fresh approval.],
   )
-  #v(0.65em)
+  #v(0.45em)
   #principle(
     3,
     [Bound how far the agent can go without you.],
@@ -58,10 +61,13 @@
   ]
   #notes[
     Approval fatigue defeats nominal oversight. A cap never authorizes a forbidden action; a rate limit alone does not cap the total. Budget reservations must include work already in flight.
-  ]
-]
 
-#slide()[
+    An expired or consumed approval cannot authorize a new attempt. Retrying the same operation needs durable execution state and an idempotency key, not a second side effect. A timeout does not prove the first request failed.
+  ]
+][
+  #accent[*Implementation examples*]
+  #v(0.45em)
+
   #enum(
     spacing: 0.9em,
     [Draft → preview → approve → execute.],
@@ -70,7 +76,4 @@
     [Start with a small batch; approve expansion.],
     [Enforce spend and runtime caps.],
   )
-  #notes[
-    An expired or consumed approval cannot authorize a new attempt. Retrying the same operation needs durable execution state and an idempotency key, not a second side effect. A timeout does not prove the first request failed.
-  ]
 ]

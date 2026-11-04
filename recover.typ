@@ -47,64 +47,66 @@
   ]
 ]
 
-#slide()[
+#principles-examples[
+  #accent[*Principles*]
+  #v(0.45em)
+
   #principle(
     1,
     [Stop execution without the model's cooperation.],
     [Have mechanisms to disable tools & credentials, pause in-flight work.],
   )
-  #v(0.55em)
+  #v(0.4em)
   #principle(
     2,
     [Protect the recovery path from the agent.],
     [Keep versioned backups and restore credentials outside its authority.],
   )
-  #v(0.55em)
+  #v(0.4em)
   #principle(
     3,
     [Rehearse restoration before you need it.],
     [Verify the data and a working user flow; measure time and lost work.],
   )
-  #v(0.55em)
+  #v(0.4em)
   #principle(
     4,
     [Restoration cannot recall disclosed information.],
     [Rotate leaked credentials, inform affected users promptly.],
   )
-  #v(0.55em)
+  #v(0.4em)
   #small[
     OWASP: emergency off-switches#cite-source("https://genai.owasp.org/download/49059/?tmstv=1753666640")[OWASP GenAI Security Project. _Securing Agentic Applications Guide_. Version 1.0, 28 July 2025, §4.1.4, printed p. 50.] · NCSC: protected, tested backups#cite-source("https://www.ncsc.gov.uk/guidance/mitigating-malware-and-ransomware-attacks")[UK National Cyber Security Centre. _Mitigating malware and ransomware attacks_. Action 1: make regular backups; accessed 4 November 2026.] · NIST: verified recovery#cite-source("https://nvlpubs.nist.gov/nistpubs/specialpublications/nist.sp.800-61r3.pdf")[NIST. _SP 800-61r3: Incident Response Recommendations and Considerations for Cybersecurity Risk Management_. April 2025. RC.RP-03--06, printed pp. 34--35.]
   ]
   #notes[
     Revocation need not cancel work a provider already accepted. Quarantine pending jobs and reconcile completed side effects before replay. Preserve evidence; close the failure path before reconnecting the restored service.
-  ]
-]
 
-#slide()[
-  #set text(size: 0.85em)
+    A refresh can mask a failed restore: serialize refreshes and drills. Raw production backups stay in a restricted recovery environment. Invalid failure injection is not a passed drill; code rollback may leave schema or data changes behind.
+  ]
+][
+  #accent[*Implementation examples*]
+  #v(0.45em)
+
+  #enum(
+    spacing: 0.65em,
+    [Independent emergency stop.],
+    [Quarantine jobs; reconcile effects before resuming.],
+    [Protected, versioned backups.],
+    [Separate code and data recovery plans.],
+    [Verified restore before reconnecting.],
+    [Monthly UAT drill and recovery receipt.],
+  )
+
+  #v(0.5em)
   #grid(
-    columns: (1.65fr, 1fr),
-    column-gutter: 0.9em,
+    columns: (auto, 1fr),
+    column-gutter: 0.7em,
     align: horizon,
+    image("assets/recovery-wheel.svg", width: 4em),
     [
-      #enum(
-        spacing: 0.65em,
-        [Independent emergency stop.],
-        [Quarantine jobs; reconcile effects before resuming.],
-        [Protected, versioned backups.],
-        [Separate code and data recovery plans.],
-        [Verified restore before reconnecting.],
-        [Monthly UAT drill and recovery receipt.],
-      )
-    ],
-    [
-      #align(center)[
-        #text(weight: 700, fill: C.accent)[The AI wheel of misfortune]
-        #v(0.3em)
-        #image("assets/recovery-wheel.svg", width: 70%)
-        #v(0.3em)
-        #small[Proposed practice: one bounded UAT drill.]
-      ]
+      #accent[*The AI wheel of misfortune*]
+      #linebreak()
+      #small[Proposed practice: one bounded UAT drill.]
     ],
   )
   #v(0.7em)
@@ -112,8 +114,5 @@
     Known baseline → inject failure → recover → verify → keep the receipt.
     #v(0.25em)
     UAT is isolated from production; success does not prove production recovery time.#cite-source("https://principlesofchaos.org/")[Principles of Chaos Engineering. _Principles of Chaos Engineering_. Controlled experiments and minimizing blast radius; accessed 4 November 2026. The UAT wheel and monthly cadence are this talk's proposed practice.]
-  ]
-  #notes[
-    A refresh can mask a failed restore: serialize refreshes and drills. Raw production backups stay in a restricted recovery environment. Invalid failure injection is not a passed drill; code rollback may leave schema or data changes behind.
   ]
 ]

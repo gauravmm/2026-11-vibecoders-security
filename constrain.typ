@@ -31,19 +31,22 @@
   ]
 ]
 
-#slide()[
+#principles-examples[
+  #accent[*Principles*]
+  #v(0.45em)
+
   #principle(
     1,
     [Give each agent one specific, narrowly scoped task.],
     [The fewer different things it has to do, the simpler the permissions.],
   )
-  #v(0.65em)
+  #v(0.45em)
   #principle(
     2,
     [Give it only the tools, data and permissions that task requires.],
     [Enforce permissions at the smallest granularity possible.],
   )
-  #v(0.65em)
+  #v(0.45em)
   #principle(
     3,
     [Enforce boundaries through infrastructure.],
@@ -55,11 +58,13 @@
   ]
   #notes[
     Task-first decomposition is our synthesis. Read-only access protects integrity, not confidentiality. A restricted connector is ineffective if shell or other credentials offer broader access. Development/production isolation is an application of IMDA guidance, not a universal requirement.
+
+    An untrusted reader can prepare draft data for a separate, narrowly authorized executor. The executor applies policy and exact-action approval; forwarding unrestricted reader output as instructions defeats the separation.
   ]
-]
+][
+  #accent[*Implementation examples*]
+  #v(0.45em)
 
-
-#slide()[
   #enum(
     spacing: 0.9em,
     [Keep credentials outside the agent's execution environment.],
@@ -75,7 +80,4 @@
     [Agents that read private data have restricted subsequent outputs.],
     [Agents that read hostile content get no consequential tools.],
   )
-  #notes[
-    An untrusted reader can prepare draft data for a separate, narrowly authorized executor. The executor applies policy and exact-action approval; forwarding unrestricted reader output as instructions defeats the separation.
-  ]
 ]

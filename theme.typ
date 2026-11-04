@@ -80,10 +80,10 @@
       },
     )),
     config-info(
-      title: [Ship Fast Without\ Shipping Holes],
+      title: [Ship Happens],
       subtitle: [Minimal security for AI startups.],
       author: [Dr. Gaurav Manek],
-      date: "2026-11",
+      date: "2026-11-12",
       institution: [gauravmanek.com],
       logo: logo(),
     ),
@@ -104,6 +104,18 @@
 #let big(body, size: 1.65em) = text(size: size, weight: 700, body)
 #let small(body) = text(size: 0.66em, fill: C.grey, body)
 #let tag(body) = text(size: 0.65em, fill: C.accent, weight: 700, body)
+// Reveal implementation examples after the principles in every section.
+#let principles-examples(principles, examples) = slide(
+  align: top,
+  composer: grid.with(columns: (1.1fr, 1fr), column-gutter: 1.5em, align: top),
+  config: config-page(margin: (left: 1em, right: 1em, bottom: 1em)),
+  setting: body => {
+    set text(size: 0.85em)
+    set par(leading: 0.4em)
+    body
+  },
+)[#principles][#pause #examples]
+
 #let card(title, body) = block(fill: C.stripe, radius: 6pt, inset: 12pt, width: 100%)[
   #text(weight: 700, fill: C.accent)[#title]
   #v(0.45em)
@@ -137,7 +149,7 @@
 
 
 // Reuse the title slide's QR panel on the conclusion.
-#let lecture-url = "https://gauravmanek.com/lectures/2026/vibecoders-security/"
+#let lecture-url = "https://gauravmanek.com/lectures/2026/ship-happens/"
 #let talk-code-panel() = grid(rows: auto, gutter: 1em)[
   #box(fill: white, inset: 1em, radius: .25em, stroke: 2pt + rgb("#444"), link(lecture-url)[
     #tiaoma.qrcode(

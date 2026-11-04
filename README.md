@@ -1,6 +1,6 @@
-# Ship Fast Without Shipping Holes
+# Ship Happens
 
-*AI security for startups that have better things to be famous for.*
+*Minimal security for AI startups. · 12 November 2026*
 
 Slides for a talk on security in AI-assisted software development. The visual
 system is based on the
@@ -64,7 +64,7 @@ The section files preserve speaker notes; splitting content does not rewrite the
 
 The personal introduction follows the title slide, adapted from the “About Me” slide in `ai-for-clm/01-intro/slides.typ` with the original portrait, credentials and contact links.
 
-The deck is intended for a 20-minute talk, followed by a separate five-minute Q&A. The opening was adapted from the April ABC Infrastructure deck, through “When Designing Infrastructure”, retaining its incident imagery, layouts and pause builds. It now uses the unified presentation theme and current talk metadata. The title and conclusion share the split layout and QR panel in `theme.typ`, linking to [this lecture's page](https://gauravmanek.com/lectures/2026/vibecoders-security/); the original helper remains archived under `assets/abc-opening/`. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
+The deck is intended for a 20-minute talk, followed by a separate five-minute Q&A. The opening was adapted from the April ABC Infrastructure deck, through “When Designing Infrastructure”, retaining its incident imagery, layouts and pause builds. It now uses the unified presentation theme and current talk metadata. The title and conclusion share the split layout and QR panel in `theme.typ`, linking to [this lecture's page](https://gauravmanek.com/lectures/2026/ship-happens/); the original helper remains archived under `assets/abc-opening/`. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
 
 Speaker notes contain concise lecture cues and non-obvious evidence limits. Detailed sources and procedures remain in the numbered references and `docs/`. Historical incident claims and the original “OWASP's STRIDE” wording remain verbatim on audience slides; notes contextualize them. `make notes` renders native Touying notes beside each slide; the audience PDF also carries presenter metadata. The notes PDF is for presenter/review use.
 

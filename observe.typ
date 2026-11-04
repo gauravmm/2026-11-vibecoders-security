@@ -51,19 +51,22 @@
   ]
 ]
 
-#slide()[
+#principles-examples[
+  #accent[*Principles*]
+  #v(0.45em)
+
   #principle(
     1,
     [Verify tool outcomes against independent evidence.],
     [Check the destination or stored state, not just the agent's report.],
   )
-  #v(0.65em)
+  #v(0.45em)
   #principle(
     2,
     [Keep evidence outside the agent's control.],
     [Protect logs and test checks; alert a named owner to dangerous outcomes.],
   )
-  #v(0.65em)
+  #v(0.45em)
   #principle(
     3,
     [Continuously test the application and its boundaries.],
@@ -75,10 +78,13 @@
   ]
   #notes[
     A refusal before a tool call never exercises backend authorization. A broken connector can look safe unless an allowed positive control succeeds. Independent outcome checks complement reasoning monitors; they do not imply reasoning traces have no detection value.
-  ]
-]
 
-#slide()[
+    Attack drivers such as PyRIT or Promptfoo must target the integrated application and real input surfaces. Use synthetic data and test destinations; repeat stochastic attacks and retain failing inputs with configuration versions. Check backend authorization separately from model behavior. A critical failure is not cancelled by a high average pass rate.
+  ]
+][
+  #accent[*Implementation examples*]
+  #v(0.45em)
+
   #enum(
     spacing: 0.8em,
     [Correlate tool requests, policy decisions and actual outcomes.],
@@ -88,9 +94,6 @@
     [Rerun evals after changes.],
   )
   #v(0.5em)
-  #notes[
-    Attack drivers such as PyRIT or Promptfoo must target the integrated application and real input surfaces. Use synthetic data and test destinations; repeat stochastic attacks and retain failing inputs with configuration versions. Check backend authorization separately from model behavior. A critical failure is not cancelled by a high average pass rate.
-  ]
 ]
 
 #slide(
