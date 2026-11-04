@@ -41,6 +41,45 @@
   ]
 
 
+  // Personal introduction imported from ai-for-clm/01-intro/slides.typ.
+  #slide(title: [About Me])[
+    #grid(
+      columns: (1fr, 2fr),
+      gutter: 1.5em,
+      align(center + horizon)[
+        #block(radius: 0.5em, clip: true)[
+          #image("assets/about/portrait.jpg", width: 100%, height: 100mm)
+        ]
+      ],
+      align(horizon)[
+        #text(weight: "bold", size: 1.35em)[Dr. Gaurav Manek]
+        #v(0.3em)
+        - Founder, *Ocellivision*
+        - Technical Lead, *ORBIT* @ IMCB
+        - *PhD* in AI/ML --- Carnegie-Mellon University (2023)
+        - Founder, *Visigoth.ai* (SaaS)
+
+        #v(0.6em)
+        #text(size: 0.85em, fill: luma(100))[
+          For follow-up questions:\
+          #link("mailto:gaurav_manek@a-star.edu.sg")[#box(baseline: 20%)[#image(
+              "assets/about/email.svg",
+              height: 1.2em,
+              alt: "Email",
+            )] gaurav_manek\@a-star.edu.sg]\
+          #link("https://www.linkedin.com/in/gauravmanek")[#box(baseline: 20%)[#image(
+              "assets/about/linkedin.svg",
+              height: 1.2em,
+              alt: "LinkedIn profile",
+            )] gauravmanek]
+        ]
+      ],
+    )
+    #notes[
+      Briefly introduce yourself before the incident examples. Personal introduction, portrait and contact icons imported from the AI for Leaders instructor deck, `ai-for-clm/01-intro/slides.typ`, at commit `94fc080369219b033acfc35e40ab83ebc55f643e`. Credentials and contact details are retained from that slide; sizing is adapted to this deck's theme.
+    ]
+  ]
+
   #slide(
     title: [Ship Fast Without Shipping Holes],
     composer: (1fr, 1.5fr),
@@ -241,17 +280,33 @@
         align: (left + horizon, left + horizon),
         box(stroke: 0.5pt + luma(180), image("assets/governance/imda-agentic-ai.png", width: 3.2em)),
         [
-          *IMDA Model AI Governance Framework for Agentic AI*#cite-source("https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf")[Infocomm Media Development Authority (IMDA). _Model AI Governance Framework for Agentic AI_. Version 1.5. Published 20 May 2026; updated 5 June 2026.] \ Risk assessment, policies and oversight. v1.5
+          *IMDA Model AI Governance Framework for Agentic AI*#cite-source("https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf")[Infocomm Media Development Authority (IMDA). _Model AI Governance Framework for Agentic AI_. Version 1.5. Published 20 May 2026; updated 5 June 2026.] \ Risk assessment, policies and oversight.
         ],
 
-        box(stroke: 0.5pt + luma(180), image("assets/governance/iso-42001.png", width: 3.2em)),
+        box(stroke: 0.5pt + luma(180), image("assets/governance/nist-ai-rmf.png", width: 3.2em)),
         [
-          *ISO/IEC 42001*#cite-source("https://www.iso.org/standard/42001")[International Organization for Standardization / International Electrotechnical Commission. _ISO/IEC 42001:2023 --- Artificial intelligence --- Management system_. First edition, December 2023.] \ AI management systems
+          *NIST AI RMF 1.0*#cite-source("https://doi.org/10.6028/NIST.AI.100-1")[National Institute of Standards and Technology. _Artificial Intelligence Risk Management Framework (AI RMF 1.0)_. NIST AI 100-1, January 2023.] \ Govern, Map, Measure, Manage
         ],
 
         box(stroke: 0.5pt + luma(180), image("assets/governance/owasp-agentic-ai-threats.png", width: 3.2em)),
         [
           *OWASP*#cite-source("https://genai.owasp.org/resource/agentic-ai-threats-and-mitigations/")[OWASP GenAI Security Project, Agentic Security Initiative. _Agentic AI --- Threats and Mitigations_. Version 1.0, 17 February 2025.] \ Agentic AI: Threats and Mitigations
+        ],
+      )
+    ]
+    #only(4)[
+      *For when you want to sell your startup:*
+      #v(0.5em)
+
+      #grid(
+        columns: (auto, 1fr),
+        column-gutter: 0.7em,
+        row-gutter: 0.7em,
+        align: (left + horizon, left + horizon),
+
+        box(stroke: 0.5pt + luma(180), image("assets/governance/iso-42001.png", width: 3.2em)),
+        [
+          *ISO/IEC 42001*#cite-source("https://www.iso.org/standard/42001")[International Organization for Standardization / International Electrotechnical Commission. _ISO/IEC 42001:2023 --- Artificial intelligence --- Management system_. First edition, December 2023.] \ AI management systems
         ],
       )
     ]
@@ -264,9 +319,9 @@
 
 
   #notes[
-    *2:30--3:10 · 40 seconds across all three builds.* Name the four principles: Constrain access and authority; Pace actions with approvals and limits; Observe actual tool outcomes; Recover with an independent stop and tested restores. Reveal the brace on build 2. On build 3, replace the right-hand summary with the IMDA, ISO and OWASP covers: these frameworks provide structure for governance, management systems and technical threats. Keep the usefulness line as the bridge. Bridge: “We will apply each of these to one useful inbox assistant.”
+    *2:30--3:10 · 40 seconds across all three builds.* Name the four principles: Constrain access and authority; Pace actions with approvals and limits; Observe actual tool outcomes; Recover with an independent stop and tested restores. Reveal the brace on build 2. On build 3, replace the right-hand summary with the IMDA, NIST and OWASP covers: these frameworks provide structure for governance, risk management and technical threats. Keep the usefulness line as the bridge. Bridge: “We will apply each of these to one useful inbox assistant.”
 
-    *Author:* Summary of the four sections in this talk. These are general design principles, not guarantees for a named connector. Keep the assistant useful while reducing the damage a mistake can cause. The governance panel is adapted from the local AI for Leaders instructor deck (`ai-for-clm`, chapter 06); covers and citations retain its editions. These four habits are our talk structure, not a claimed mapping or certification against those frameworks.
+    *Author:* Summary of the four sections in this talk. These are general design principles, not guarantees for a named connector. Keep the assistant useful while reducing the damage a mistake can cause. The governance panel is adapted from the local AI for Leaders instructor deck (`ai-for-clm`, chapter 06); IMDA and OWASP covers retain its editions; the NIST cover is rendered from the official AI RMF 1.0 publication. NIST describes the AI RMF as a voluntary framework, not a certification standard. These four habits are our talk structure, not a claimed mapping or certification against those frameworks.
   ]
 
 ]

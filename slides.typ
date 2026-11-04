@@ -109,7 +109,6 @@
   main-background-color: C.paper,
   main-text-color: C.ink,
   progress-bar-background: C.accent,
-  footer: [Vibecoders Security],
   config-common(show-notes-on-second-screen: if sys.inputs.at("notes", default: "false") == "true" { right } else {
     none
   }),
@@ -172,89 +171,76 @@
   #opening(notes: notes, accent: accent)
 ]
 
-#slide(title: [Two routes to the same tool.])[
-  #grid(
+#slide(
+  title: [1. Constrain],
+  config: config-page(margin: (left: 0pt, right: 0pt, bottom: 0pt), footer: none),
+)[
+  #layout(size => block(width: size.width, height: size.height, grid(
     columns: (1fr, 1fr),
-    column-gutter: 1em,
-    card([An ordinary mistake], [The agent misunderstands your cleanup request.]), card([A hostile instruction], [An email tells it to send private data elsewhere.]),
+    rows: (auto, 1fr),
+    column-gutter: 0pt,
+    row-gutter: 0.5em,
+    align: center,
+    [*Mistake: deletes the inbox.*#cite-source("https://www.tomshardware.com/tech-industry/artificial-intelligence/openclaw-wipes-inbox-of-meta-ai-alignment-director-executive-finds-out-the-hard-way-how-spectacularly-efficient-ai-tool-is-at-maintaining-her-inbox")[Tom's Hardware. _OpenClaw wipes inbox despite stop commands_. 24 February 2026.]], [*Injection: publishes private data.*#cite-source("https://invariantlabs.ai/blog/mcp-github-vulnerability")[Invariant Labs disclosure, 26 May 2025]],
+
+    layout(frame => link("https://x.com/summeryue0/status/2025774069124399363", image(
+      "assets/meta_email.png",
+      width: frame.width,
+      height: frame.height,
+      fit: "cover",
+    ))),
+    layout(frame => link("https://invariantlabs.ai/blog/mcp-github-vulnerability", image(
+      "assets/invariant-github-disclosure.png",
+      width: frame.width,
+      height: frame.height,
+      fit: "cover",
+    ))),
+  )))
+  #notes[
+    *3:10--4:00 · 50 seconds.* Left: Summer Yue reported OpenClaw deleting and archiving inbox messages despite her instruction to confirm first. This is her published account, not an independently audited mailbox trace. The existing assets/meta_email.png is a capture of her post and chat screenshots, including a translated paragraph. Do not claim permanent loss or an established compaction root cause.
+
+    Right: Invariant Labs demonstrated an attacker-controlled public GitHub issue inducing a connected agent to read private repositories and publish information in a public pull request. This is a researcher-controlled demonstration, not a reported customer breach. The screenshot captures the headline, date and introduction of #link("https://invariantlabs.ai/blog/mcp-github-vulnerability")[Invariant's disclosure page].
+
+    One route is an ordinary task going wrong; the other is hostile instructions in content the agent reads. Both reach the same tools. Available credentials and tools determine the possible consequence. Bridge directly into limiting the inbox assistant's permissions.
+  ]
+]
+
+#slide(title: [Enforce boundaries outside the model])[
+  #import "principles.typ": principle
+
+  #principle(
+    1,
+    [Give it only the authority the task needs.],
+    [Scope permissions to the required resources and operations.],
   )
-  #v(1em)
-  #align(center)[#big[Agent → tool → consequence]]
   #v(0.65em)
-  #align(center)[#accent[Enforce the boundary outside the model.]]
-  #v(0.35em)
-  #small[Sources: #cite-source("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP Security Cheat Sheet]]
-  #notes[
-    *3:10--4:00 · 50 seconds.* Our one example is an inbox assistant that suggests cleanup and drafts replies. It can misunderstand a legitimate task, or read attacker-controlled instructions in an email, issue, webpage or tool result. The second route is indirect prompt injection: untrusted content is mistaken for authority.
-
-    Available credentials and tools determine the possible consequence. Better prompts and models can help, but consequential limits also need ordinary code/configuration outside the model. A classifier or output filter is supplementary, not an authorization boundary.
-
-    *Source:* #link("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP Security Cheat Sheet]. This is a general system design, not a promise about a named agent or connector. Bridge directly into the inbox permissions.
-  ]
-]
-
-#slide(title: [Constrain · Give it a smaller world.])[
-  #dtable(
-    columns: (1fr, 1.6fr),
-    size: 0.9em,
-    [Useful job],
-    [Authority it actually needs],
-    [Summarize mail],
-    [Read the relevant mailbox or records],
-    [Prepare replies],
-    [Create drafts],
-    [Suggest cleanup],
-    [Produce a reviewable list],
+  #principle(
+    2,
+    [Give it narrow tools.],
+    [Remove unnecessary functions; prefer specific operations over a general shell.],
   )
-  #v(0.8em)
-  #accent[Keep permanent deletion outside its authority.]
-  #v(0.35em)
-  #small[Sources: #cite-source("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP guidance]]
-  #notes[
-    *4:00--5:10 · 70 seconds.* The assistant is still useful with less authority. Limit the records it reads; give it draft creation without a general send tool; return a cleanup list rather than permanent deletion. If moving to trash is permitted, keep permanent deletion separate. The agent should not be able to grant itself more access, change its enforcement controls or retrieve bypass credentials.
-
-    *Hosted tools:* These are boundaries to implement and verify, not connector feature guarantees. If a product cannot enforce a narrow scope, disconnect the consequential capability and do that step yourself. A solo founder can start with fewer tools and existing settings; no gateway purchase is required.
-
-    *Source:* #link("https://cheatsheetseries.owasp.org/cheatsheets/MCP_Security_Cheat_Sheet.html")[OWASP MCP guidance]. *Optional:* discuss time-limited task credentials only in Q&A.
-  ]
-]
-
-#slide(title: [Constrain · Read-only still means it can copy.])[
-  #align(center)[
-    #big[Private mail → agent → public destination]
-    #v(1em)
-    Scope what it can read #strong[and] where it can write.
-  ]
-  #v(0.35em)
-  #small[Sources: #cite-source("https://invariantlabs.ai/blog/mcp-github-vulnerability")[Invariant Labs disclosure, 26 May 2025]]
-  #notes[
-    *5:10--6:10 · 60 seconds.* Read access is disclosure authority. An agent that can read private mail and write arbitrary public posts or outbound messages has a disclosure path, even if the source connector is read-only. Narrow sources and destinations together, including other tools such as browser, shell and network.
-
-    *Optional evidence, one sentence:* Invariant Labs demonstrated instructions in a public GitHub issue inducing an agent with connected tools to read private-repository information and disclose it through a public PR. It is a researcher demonstration of a particular configuration, not current exploit prevalence or a claim that every GitHub client is exposed.
-
-    *Source:* #link("https://invariantlabs.ai/blog/mcp-github-vulnerability")[Invariant Labs disclosure, 26 May 2025]. *Cut if late:* the researcher example; retain the source/destination principle.
-  ]
-]
-
-#slide(title: [Constrain · Build, rehearse, serve.])[
-  #grid(
-    columns: (1fr, auto, 1fr, auto, 1fr),
-    column-gutter: 0.45em,
-    align: horizon,
-    card([Dev], [Agent builds with test data.]), [→], card([Staging / UAT], [Rehearse the reviewed change.]), [→], card([Production], [Serve customers.]),
-  )
-  #v(0.9em)
-  #accent[The development agent gets no production credentials.]
   #v(0.65em)
-  #small[Scheduled refresh: sanitize in the protected production boundary → validate → staging.]
-  #v(0.35em)
-  #small[Sources: #cite-source("https://owasp.github.io/DevSecOpsGuideline/3-Governance/3-2-Data-protection/")[OWASP data protection]]
+  #principle(3, [Contain where it can act.], [Limit network and data access; isolate development from production.])
+  #v(0.65em)
+  #principle(
+    4,
+    [Enforce boundaries at the infrastructure level.],
+    [The agent must have no way to bypass the controls or change its own permissions.],
+  )
+  #v(0.7em)
+  #small[
+    NIST: least privilege#cite-source("https://csrc.nist.gov/glossary/term/least_privilege")[NIST CSRC. _Least privilege_. Glossary; accessed 4 November 2026.] · OWASP: excessive agency#cite-source("https://genai.owasp.org/llmrisk/llm062025-excessive-agency/")[OWASP GenAI Security Project. _LLM06:2025 Excessive Agency_. Prevention and mitigation strategies 1--7.] · IMDA: agent limits#cite-source("https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf")[Infocomm Media Development Authority (IMDA). _Model AI Governance Framework for Agentic AI_. Version 1.5. Published 20 May 2026; updated 5 June 2026.]
+  ]
   #notes[
-    *6:10--8:00 · 110 seconds.* Translate to coding agents. Dev builds/tests in an isolated workspace; a reviewed change advances to staging/UAT and then production. UAT means user acceptance testing; it may share staging. No fourth environment is required. Separate data, credentials and integration configuration. Different folders are insufficient if shell access exposes the founder's host credentials. The dev agent gets neither production secrets nor an unrestricted deployment tool.
+    *4:00--8:00 · 4 minutes.* Use the preceding inbox and GitHub screenshots as the motivating examples. These four points are our synthesis of the cited guidance.
 
-    *Realistic test data:* For example, a weekly one-way refresh runs a restricted extraction/sanitization job inside a protected production-side boundary. Ordinary staging users and agents never get raw extracts or production credentials. Replace names, addresses, emails and identifying account values with consistent synthetic equivalents; remove secrets, tokens and live integrations. Treat free text, attachments and combinations of fields as identifying too. Validate schema, destinations and relationships before publishing; fail closed on unhandled sensitive fields. If safe de-identification cannot be established, use synthetic fixtures. Bound production load. Show dataset version/date.
+    *Authority:* NIST defines least privilege in terms of the minimum access needed for assigned tasks. Give the agent an identity scoped to the relevant mailbox, repository or database records, with only the required operations. A recommendation-only assistant needs no mutation authority. Read access can still disclose information through other tools, so restrict sources and destinations together.
 
-    Staging uses test payments and captured email/webhooks, with no path back through shared databases, queues or connectors. A refresh is not a backup. *Sources/detail:* docs/recovery-drill.md, scheduled refresh; #link("https://owasp.github.io/DevSecOpsGuideline/3-Governance/3-2-Data-protection/")[OWASP data protection]. *Cut:* field-by-field examples, not the production credential boundary.
+    *Tools:* OWASP LLM06, mitigation strategies 1--5, distinguishes unnecessary functionality from excessive permissions. Remove unused tools and functions; provide specific operations instead of open-ended shell access where possible. A mail-reading tool should not also expose sending and deletion. Apply permissions to the downstream identity, not just the tools presented to the model.
+
+    *Containment:* IMDA's framework, section 2.1.2, recommends limits on tools, data and area of impact, including self-contained environments with limited network and data access for risky tasks such as code execution. Isolating a development agent from production credentials is our application of that guidance, not a universal IMDA requirement. Separate folders alone do not isolate host secrets or broader credentials.
+
+    *Enforcement:* OWASP LLM06, mitigation 7, calls for downstream authorization and complete mediation: validate every request against policy instead of relying on the model to decide what is allowed. The agent must not be able to edit the policy, grant itself permissions, retrieve broader credentials or reach the same resource through another tool. A restricted connector is ineffective if shell, browser or direct API access bypasses it. Keep enforcement configuration and privileged credentials outside the agent's reach, and test that alternate paths are denied. If a hosted product cannot enforce the scope, narrow its input or keep the consequential action manual. Approvals and execution limits follow under Pace.
   ]
 ]
 

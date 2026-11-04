@@ -7,6 +7,7 @@
   "ignorePaths": [".fonts/**", "assets/**", "*.pdf", "LICENSE", ".git/**"],
   "ignoreRegExpList": ["Urls", "HexValues"],
   "words": [
+    "alexey",
     "autobench",
     "barh",
     "barw",
@@ -24,8 +25,10 @@
     "gauravmanek",
     "gauravmm",
     "greylt",
+    "grigorev",
     "gtig",
     "hiang",
+    "imcb",
     "imda",
     "infocomm",
     "infostealer",
@@ -70,6 +73,7 @@
     "typstyle",
     "underbrace",
     "vibecoders",
+    "vectara",
     "willison",
     "yaohui"
   ]

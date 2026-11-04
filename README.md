@@ -41,7 +41,8 @@ Typst symbol such as `#sym.dash.em` instead of writing the literal character.
 - `principles.typ` — numbered principle rows with optional examples.
 - `opening.typ` — the exact audience opening from the April reference, with new presenter notes.
 - `assets/abc-opening/` — original helper and unmodified images for that opening.
-- `assets/governance/` — IMDA, ISO and OWASP covers for build 3 of “When Designing Infrastructure”, adapted from the AI for Leaders instructor deck.
+- `assets/about/` — portrait and contact icons for the personal introduction imported from `ai-for-clm`.
+- `assets/governance/` — IMDA, NIST and OWASP covers for build 3 of “When Designing Infrastructure”, adapted from the AI for Leaders instructor deck.
 - `assets/` — images and generated plots.
 - `.fonts/` — vendored Roboto fonts for reproducible builds.
 - `.githooks/pre-commit` — the tracked local quality gate.
@@ -49,6 +50,8 @@ Typst symbol such as `#sym.dash.em` instead of writing the literal character.
   releases.
 
 ## Presenting
+
+The personal introduction follows the title slide, adapted from the “About Me” slide in `ai-for-clm/01-intro/slides.typ` with the original portrait, credentials and contact links.
 
 The main deck has 20 spoken slides for a 20-minute talk, followed by a separate five-minute Q&A slide and two optional appendix slides. The six-slide opening was copied exactly from the April ABC Infrastructure deck, through “When Designing Infrastructure”, including the original title, April event/date, institution, QR target, images, layouts and pause builds, by request. Its original left footer is empty; the later slides retain the current design. Slide totals in the original footer reflect this deck's length. At the time of copying, all ten opening build pages matched the reference pixel for pixel outside the slide-total digits. The title and subtitle have since been updated for this talk. The opening is budgeted at 3:10, followed by a 50-second transition; Constrain still begins at 4:00.
 

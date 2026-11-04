@@ -20,7 +20,7 @@ The exact six-slide ABC opening through “When Designing Infrastructure” now 
 |---|---|---|
 | 0:00–2:00 | Hook: the agent would not stop | Original email incident screenshot |
 | 2:00–4:00 | Setup: an accident is not a diagnosis | Pilot-error analogy; agent/action boundary |
-| 4:00–8:00 | Constrain | Email permissions; dev → staging → production |
+| 4:00–8:00 | Constrain | Inbox/GitHub examples → least privilege, narrow tools, containment and enforcement |
 | 8:00–11:00 | Pace | Draft, approval, action; bounded execution |
 | 11:00–15:00 | Observe and challenge | One automated red-team trace |
 | 15:00–18:00 | Recover | UAT wheel of misfortune |
@@ -80,27 +80,16 @@ mindmap
       UAT wheel of misfortune
 ```
 
-## 3. Constrain: give it a smaller world — 4 minutes
+## 3. Constrain: enforce boundaries outside the model — 4 minutes
 
-Return to the inbox agent. Its useful job is to suggest a cleanup and draft replies. It can do that without permanently deleting mail or sending arbitrary messages.
+The two-image introduction shows the OpenClaw inbox account and Invariant's GitHub demonstration. It is followed by one principles slide, replacing the three incident slides from the earlier draft.
 
-| Useful capability | Boundary to implement |
-|---|---|
-| Summarize relevant messages | Scope which mailbox or records it can read. |
-| Prepare a reply | Draft creation, without a general send capability. |
-| Suggest cleanup | Produce a reviewable list; if moving to trash is allowed, keep permanent deletion outside its authority. |
+1. **Give it only the authority the task needs.** Scope permissions to required resources and operations. Source: [NIST least privilege](https://csrc.nist.gov/glossary/term/least_privilege).
+2. **Give it narrow tools.** Remove unnecessary functions and prefer specific operations over a general shell. Source: [OWASP LLM06, mitigations 1–5](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/).
+3. **Contain where it can act.** Limit network and data access; isolate development from production. Source: [IMDA Model AI Governance Framework for Agentic AI, §2.1.2](https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf). The development/production arrangement is our application of the guidance.
+4. **Enforce boundaries at the infrastructure level.** The agent must have no way to bypass controls or change its own permissions. Source: OWASP LLM06, mitigation 7, downstream authorization and complete mediation. Include shell, browser and direct-credential paths.
 
-These are design choices, not promises about a named connector. If a hosted tool cannot enforce the boundary, disconnect that capability and do the consequential step yourself.
-
-**“Read-only still means it can copy.”** An agent able to read private content and write to a public destination has a disclosure path. Narrow sources and destinations together. Invariant's GitHub MCP demonstration showed this combination: instructions in a public issue induced private-repository disclosure through connected tools. Mention it briefly as a researcher demonstration, not a claim about current exploit prevalence. [Disclosure](https://invariantlabs.ai/blog/mcp-github-vulnerability)
-
-### Translate to coding agents: build, rehearse, serve
-
-Show **dev → staging/UAT → production**. The agent builds and tests in an isolated workspace; reviewed changes advance through staging to production. For this tiny-team setup, the development agent does not receive production credentials or an unrestricted deployment tool. Separate folders are insufficient if it can still read the founder's host credentials. Staging can also serve as UAT; a fourth environment is unnecessary.
-
-Make test data realistic on a schedule: for example, refresh staging weekly through a protected production-side sanitization job. Replace names, addresses, emails and other identifying content before publishing the dataset to staging; exclude secrets and live email/payment integrations. Preserve useful relationships, not real identities. If safe de-identification cannot be established, use synthetic data. Details: [environment and refresh recipe](recovery-drill.md#scheduled-refresh-realistic-data-without-real-identities).
-
-**Takeaway:** the agent should not be able to grant itself more access, change its own enforcement controls, or retrieve credentials that bypass them.
+Retain the 4:00–8:00 speaking allocation, using the preceding screenshots as examples. Approvals and execution caps follow under Pace. [Incident research and alternatives](research-ai.md#constrain-incident-research-4-november-2026) remain background; [the refresh recipe](recovery-drill.md#scheduled-refresh-realistic-data-without-real-identities) remains supporting material.
 
 ## 4. Pace: put the checkpoint before the consequence — 3 minutes
 

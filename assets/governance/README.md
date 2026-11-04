@@ -1,6 +1,6 @@
 # Governance covers
 
-Copied without modification from the local `ai-for-clm` instructor deck at
+The IMDA, ISO and OWASP covers were copied without modification from the local `ai-for-clm` instructor deck at
 commit `94fc080369219b033acfc35e40ab83ebc55f643e`, chapter `06-governance.typ`.
 The rendered source slide is distributed in OcelliQ/ai-for-leaders.
 
@@ -10,3 +10,5 @@ The rendered source slide is distributed in OcelliQ/ai-for-leaders.
 
 Full source citations are attached to the labels in `opening.typ` and collected
 in this deck's reference slides. The covers retain their original attribution.
+
+- `nist-ai-rmf.png`: first page rendered from [NIST AI 100-1, AI RMF 1.0](https://nvlpubs.nist.gov/nistpubs/ai/NIST.AI.100-1.pdf), January 2023. Used in subslide 3; subslide 4 retains the ISO cover. Source: National Institute of Standards and Technology; retrieved 4 November 2026.
