@@ -26,7 +26,8 @@ make install-hooks  # activate the tracked pre-commit hook
 `make check` needs [ripgrep](https://github.com/BurntSushi/ripgrep),
 [typstyle](https://github.com/typstyle-rs/typstyle) 0.15.2 on `PATH` and `npx`
 for [cspell](https://cspell.org). CI runs the same target as the pre-commit
-hook.
+hook. The Makefile discovers all root-level `.typ` files, so new section files
+automatically participate in rebuilds and formatting checks.
 
 Typst source uses ASCII `-` only for dashes: write `-`, `--` (en dash), or
 `---` (em dash). The check covers `.typ` files, including comments and notes.
@@ -35,11 +36,14 @@ Typst symbol such as `#sym.dash.em` instead of writing the literal character.
 
 ## Layout
 
-- `slides.typ` — the current deck and its reusable styles.
+- `slides.typ` — entry point: applies the shared theme once, then includes the sections in presentation order.
+- `theme.typ` — deck-wide metadata, colors, typography, presenter-note layout and reusable styles. Also holds the scoped historical opening configuration.
+- `constrain.typ`, `pace.typ`, `observe.typ`, `recover.typ` — one editable content file per principle.
+- `closing.typ` — closing slides, Q&A, appendices and collected references.
 - `citations.typ` — linked superscript citations, deduplicated by URL/key, with automatic reference slides.
 - `blocks.typ` — grey and outlined blocks; both accept `center: true`.
 - `principles.typ` — numbered principle rows with optional examples.
-- `opening.typ` — the exact audience opening from the April reference, with new presenter notes.
+- `opening.typ` — opening content adapted from the April reference, including the introduction and presenter notes.
 - `assets/abc-opening/` — original helper and unmodified images for that opening.
 - `assets/about/` — portrait and contact icons for the personal introduction imported from `ai-for-clm`.
 - `assets/governance/` — IMDA, NIST and OWASP covers for build 3 of “When Designing Infrastructure”, adapted from the AI for Leaders instructor deck.
@@ -48,6 +52,13 @@ Typst symbol such as `#sym.dash.em` instead of writing the literal character.
 - `.githooks/pre-commit` — the tracked local quality gate.
 - `.github/workflows/` — checks on pushes and pull requests, plus tagged PDF
   releases.
+
+Edit content in its section file; keep shared presentation settings in `theme.typ`.
+Each section imports the shared helpers without applying the theme again.
+`slides.typ` applies the theme before including any content. The opening retains
+its historical event metadata through a scoped configuration defined in `theme.typ`;
+intentional slide-specific layouts (such as edge-to-edge images) remain local.
+The section files preserve speaker notes; splitting content does not rewrite them.
 
 ## Presenting
 

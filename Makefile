@@ -5,7 +5,7 @@ FONTS  := --font-path .fonts
 TYPSTYLE := typstyle --line-width 100000 --wrap-text=fill
 CSPELL := npx -y cspell@10.4.0 lint --no-progress --dot
 ASSETS := $(shell find assets -type f)
-SOURCES := slides.typ opening.typ citations.typ principles.typ blocks.typ
+SOURCES := $(wildcard *.typ)
 
 slides.pdf: $(SOURCES) $(ASSETS)
 	typst compile $(FONTS) slides.typ

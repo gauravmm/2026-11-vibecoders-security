@@ -84,10 +84,9 @@ mindmap
 
 The two-image introduction shows the OpenClaw inbox account and Invariant's GitHub demonstration. It is followed by one principles slide, replacing the three incident slides from the earlier draft.
 
-1. **Give it only the authority the task needs.** Scope permissions to required resources and operations. Source: [NIST least privilege](https://csrc.nist.gov/glossary/term/least_privilege).
-2. **Give it narrow tools.** Remove unnecessary functions and prefer specific operations over a general shell. Source: [OWASP LLM06, mitigations 1–5](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/).
-3. **Contain where it can act.** Limit network and data access; isolate development from production. Source: [IMDA Model AI Governance Framework for Agentic AI, §2.1.2](https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf). The development/production arrangement is our application of the guidance.
-4. **Enforce boundaries at the infrastructure level.** The agent must have no way to bypass controls or change its own permissions. Source: OWASP LLM06, mitigation 7, downstream authorization and complete mediation. Include shell, browser and direct-credential paths.
+1. **Give each agent one specific, narrowly scoped task.** Define success and what falls outside its remit. This is our task-first design recommendation, making the required authority easier to define.
+2. **Give it only the tools, data and permissions that task requires.** A necessary tool can still expose unnecessary records or destructive operations. Sources: [NIST least privilege](https://csrc.nist.gov/glossary/term/least_privilege) and [OWASP LLM06, mitigations 1–5](https://genai.owasp.org/llmrisk/llm062025-excessive-agency/).
+3. **Enforce boundaries through infrastructure.** The agent cannot bypass controls, change its permissions or obtain broader credentials. Sources: OWASP LLM06, mitigation 7, downstream authorization and complete mediation; [IMDA Model AI Governance Framework for Agentic AI, §2.1.2](https://www.imda.gov.sg/-/media/imda/files/about/emerging-tech-and-research/artificial-intelligence/mgf-for-agentic-ai.pdf). Include shell, browser and direct-credential paths. Separating agents with different levels of trust or authority, including development from production, is an application of the guidance.
 
 Retain the 4:00–8:00 speaking allocation, using the preceding screenshots as examples. Approvals and execution caps follow under Pace. [Incident research and alternatives](research-ai.md#constrain-incident-research-4-november-2026) remain background; [the refresh recipe](recovery-drill.md#scheduled-refresh-realistic-data-without-real-identities) remains supporting material.
 
